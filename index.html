@@ -8,31 +8,41 @@
     <script src='https://d3js.org/d3.v4.min.js'></script>
     <script src="https://d3js.org/d3-path.v1.min.js"></script>
     <script src="https://d3js.org/d3-shape.v1.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">       
+
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+
 
 
     <style>
 
     body {
-        padding: 100;
+        padding: 50;
         text-align: center;
-        max-width: 800px;
+        max-width: 900px;
         min-width: 480px;
         margin: 0 auto;
         font-family: 'Crimson Text', sans-serif;
     }
 
-    .header {
-        font-size: 24px;
+    img {
+        max-width: 100px;
+    }
+
+    .page-header h1 {
+        font-size: 50px;
+    }
+
+    .nav {
+        font-size: 18px;
     }
 
     svg {
-        margin: 0 auto;
-        max-width: 100px;
+        max-width: 150px;
         width: 100%;
-        position: relative;
-        overflow: visible;
-        text-align: center;
+        overflow: visible !important; 
+        margin: 0px 40px;
     }
 
     div {
@@ -40,66 +50,74 @@
         position: relative;
     }
 
-    text {
+
+    text  {
     	font-size: 12px;
-        position: absolute;
         padding: 100px;
 
     }
 
-    .annotation {
-        font-size: 20px;
-        position: relative;
-        text-align: center;
+    .container{
+        display: flex;
     }
 
-    svg-diagram {
-        text-align: center;
-        position: absolute;
+    .flex-item{
+        flex-grow: 1;
+    }   
+
+    .annotation {
+        max-width: 750px;
+        font-size: 16px;
+        position: right;
+        text-align: left;
+/*        border: solid 1px;*/
     }
+
+/*    svg-diagram {
+        margin: 50px;
+        text-align: right;
+        float: left;
+    }*/
+
+
     </style>
 </head>
 
 
 <body>
-      
 
-        <div class="header">
-            <h1>Force dynamic diagrams</h1>
+        <div class="page-header">
+          <a class="navbar-brand" href="#">
+            <img alt="Brand" src="logo.png">
+          </a>
+          <h1>Event decomposition<small> Force dynamics</small></h1>
         </div>
 
-        <div class="form"><input type="submit" value="Generate diagram" class="submitDiagram"></div>
+        <ul class="nav nav-pills">
+          <li role="presentation"><a href="#">Home</a></li>
+          <li role="presentation"><a href="#">Details</a></li>
+          <li role="presentation"><a href="#">VerbNet</a></li>
+        </ul>
 
-        <div class="svg-diagram" ></div>
+        <div class="form"><input type="button" value="Generate diagram" class="btn btn-default"></div>
 
-        <div class="annotation">
-            <p><br></p>
-            <div class="textbox" id="textbox"></div>
-            <div class="reset_div" id="reset_id" ></div>
+        <div class="container">
+            <div class="svg-diagram" ></div>
+
+            <div class="annotation flex-item">
+                <p><br></p>
+                <div class="textbox" id="textbox"></div>
+            </div>
         </div>
 
         
 
     <script>
 
-    var submitDiagram = document.querySelector('.submitDiagram');
-    var resetButton;
+    var generateDiagram = document.querySelector('.btn');
     var currentEvent = 0;
 
-    submitDiagram.addEventListener('click', draw);
-
-
-    function setClearScreen() {
-
-          submitDiagram.disabled = true;
-          resetButton = document.createElement('button');
-          resetButton.textContent = 'Clear screen for next diagram';
-          //document.body.appendChild(resetButton);
-          document.getElementById('reset_id').appendChild(resetButton);
-          resetButton.addEventListener('click', resetScreen);  
-
-    } 
-
+    generateDiagram.addEventListener('click', draw);
 
     function resetScreen() {
 
@@ -111,11 +129,11 @@
         var resetText = document.querySelectorAll('.textbox');
         for (var i = 0 ; i < resetText.length ; i++) {
             resetText[i].textContent = '';
-        }        
+        }   
 
-        resetButton.parentNode.removeChild(resetButton);
+        currentEvent++;
 
-        submitDiagram.disabled = false;
+        draw();
 
     }
 
@@ -131,9 +149,6 @@
 
     }
 
-
-    // calling draw function
-    // draw();
 
     // the aspect objects
     function getObjects (height) {
@@ -206,9 +221,9 @@
                                                     "c" : [{"x":-1, "y":height-20}, {"x":-1, "y": height-60}],
                                                     "r" : ["None"]},
 
-                                    "fd1" : {"when-first": {"x":20, "y":height-20}, "when-second": {"x":20, "y":height-20}},
+                                    "fd1" : {"when-first": {"x":20, "y":height-20}, "when-second": {"x":20, "y":height-10}},
 
-                                    "fd2" : {"when-first": {"x":100, "y":height-20}, "when-second": {"x":100, "y":height-20}},
+                                    "fd2" : {"when-first": {"x":100, "y":height-20}, "when-second": {"x":100, "y":height-10}},
 
                                     "name" : "UndAct"
 
@@ -378,6 +393,8 @@
         var c = myAspectObject["bcr-labels"]["c"];
         var r = myAspectObject["bcr-labels"]["r"];
 
+        var aspectName = myAspectObject["name"];
+
         var lineGraph = svgContainer.append("path")
                                     .attr("d", lineFunction(solidLine))
                                     .attr("stroke", "blue")
@@ -411,7 +428,7 @@
 
             }
 
-        if (c[0]!='None') {
+        if (c[0]!='None' && aspectName.indexOf("Ach")==-1) {
 
             var addC = svgContainer.append("path")
                                 .attr("d", lineFunction(c))
@@ -599,7 +616,7 @@
         }
 
 
-        if (theme != 'FRC' && theme != 'PTH') {
+        if (theme!==undefined && theme != 'FRC' && theme != 'PTH') {
 
             if (r[0]!="None") {
 
@@ -764,6 +781,7 @@
 
         // var eventComponents = parsePredCalc(inputPredCalc);
 
+
         var events = [
                 ['Susan cut the recipes from the magazine with a sharp knife', 'Instrument Remove', 'incremental accomplishment', 'Sbj V Obj PathP with Obl', "cut('Susan', 'knife', 'recipes', 'magazine')", 'Theme-of(z,e) & Component-of(a,Susan) & Component-of(b,knife) & Component-of(c,recipes) & Component-of(d,magazine) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & InhStPh(d,i,m,q4) & VOL(q1) & -MER(q3) & FRC(a,b) & FRC(b,c) & PTH(c,d)'],
 
@@ -787,6 +805,7 @@
         ];
 
         var predcalc = events[currentEvent][5];
+
         
         var eventComponents = parsePredCalc(predcalc);
 
@@ -807,6 +826,7 @@
         var svgContainer = d3.select(".svg-diagram").append("svg")
                                             .attr("width", 200)
                                             .attr("height", svgHeight);
+
 
         // recordObjects keeps a history of the objects for drawing of FD lines
         var recordObjects = []
@@ -883,7 +903,6 @@
                 
             }
 
-
             svgHeight = svgHeight - thisAspectHeight;
         }
 
@@ -893,14 +912,13 @@
         // var syntax = events[currentEvent][3];
         // var predicate = events[currentEvent][4];
 
-        for (var i=0; i<1; i++) {
-            var addedText = addSecondDivText(events[currentEvent][i]);
+        for (var n=0; n<6; n++) {
+            var addedSentence = addSecondDivText(events[currentEvent][n]);
+            var addedBlank = addSecondDivText('');
         }
 
-
-        currentEvent++;
-
-        setClearScreen();
+        generateDiagram.addEventListener('click', resetScreen);
+        generateDiagram.removeEventListener('click', draw);
 
     }
 
@@ -909,3 +927,4 @@
 
 
 </body>
+</html>
