@@ -3,6 +3,7 @@
 
 <head>
     <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Force dynamics</title>
 
     <script src='https://d3js.org/d3.v4.min.js'></script>
@@ -32,6 +33,7 @@
 
     .page-header h1 {
         font-size: 50px;
+        text-align: center;
     }
 
     .nav {
@@ -42,7 +44,7 @@
         max-width: 150px;
         width: 100%;
         overflow: visible !important; 
-        margin: 0px 40px;
+        margin: 0px 60px;
     }
 
     div {
@@ -53,7 +55,7 @@
 
     text  {
     	font-size: 12px;
-        padding: 100px;
+        padding: 30px;
 
     }
 
@@ -73,6 +75,11 @@
 /*        border: solid 1px;*/
     }
 
+    h2{
+        font-weight: bold;
+        font-size: 20px;
+    }
+
 /*    svg-diagram {
         margin: 50px;
         text-align: right;
@@ -90,7 +97,7 @@
           <a class="navbar-brand" href="#">
             <img alt="Brand" src="logo.png">
           </a>
-          <h1>Event decomposition<small> Force dynamics</small></h1>
+          <h1>Event decomposition<small><wbr>Force dynamics</small></h1>
         </div>
 
         <ul class="nav nav-pills">
@@ -133,21 +140,57 @@
 
         currentEvent++;
 
+        if (currentEvent===events.length){
+            currentEvent=0;
+        }
+
         draw();
 
     }
 
-    function addSecondDivText (myText) {
+    function addSecondDivText (myText, bold=true) {
 
         var theDiv = document.getElementById("textbox");
-        var br = document.createElement("br")
+        var h2 = document.createElement("H2");
         var content = document.createTextNode(myText);
 
-        theDiv.appendChild(content);
-
-        theDiv.appendChild(br);
+        if (bold==true) {
+            theDiv.appendChild(h2);
+            h2.appendChild(content);
+        } else {
+            theDiv.appendChild(content);
+        }
 
     }
+
+    // the event representations
+
+    var events = [
+        ['Susan cut the recipes from the magazine with a sharp knife', 'cut-21.1', 'Sbj V Obj PathP with Obl', 'Instrument Remove', 'incremental accomplishment', 'Sbj V Obj PathP with Obl', "cut('Susan', 'knife', 'recipes', 'magazine')", 'Theme-of(z,e) & Component-of(a,Susan) & Component-of(b,knife) & Component-of(c,recipes) & Component-of(d,magazine) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & InhStPh(d,i,m,q4) & VOL(q1) & -MER(q3) & FRC(a,b) & FRC(b,c) & PTH(c,d)'],
+
+        ['Doug cleaned the table of dishes', 'clear-10.3', 'Sbj V Obj of Obl', 'Volitional Uncover', 'incremental accomplishment', 'Sbj V Obj of Obl', "cleaned('Doug', 'dishes', 'table')", 'Theme-of(z,e) & Component-of(a,Doug) & Component-of(b,dishes) & Component-of(c,table) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & VOL(q1) & -MER(q3) & FRC(a,b) & PTH(b,c)'],
+
+        ['The books slid from the table to the floor', 'slide-11.2', 'Sbj V PathP', 'Autonomous Motion', 'incremental accomplishment', 'Sbj V PathP', "slid('books', 'floor')", 'Theme-of(x,e) & Component-of(a,books) & Component-of(b,floor) & IncrAcc(a,i,j,q1) & InhStPh(b,i,k,q2) & MOT(q1) & EXIST(q2) & PTH(a,b)'],
+
+        ['David constructed a house out of sticks', 'create-26.4', 'Sbj V Obj from/out of Obl', 'Volitional Form', 'nonincremental accomplishment', 'Sbj V Obj from/out of Obl', "constructed('David', 'sticks', 'house')", 'Theme-of(z,e) & Component-of(a,David) & Component-of(b,sticks) & Component-of(c,house) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & NonIncrAcc(c,i,l,q3) & VOL(q1) & DES(q3) & FRC(a,b) & FORM(b,c)'],
+
+        ['Paula hit the ball with a stick', 'hit-18.1', 'Sbj V Obj with Obl', 'Instrument Force', 'cyclic achievement', 'Sbj V Obj with Obl', "hit('Paula', 'stick', 'ball')", 'Theme-of(z,e) & Component-of(a,Paula) & Component-of(b,stick) & Component-of(c,ball) & CycAch(a,i,j,q1) & CycAch(b,i,k,q2) & CycAch(c,i,l,q3) & VOL(q1) & FRC(a,b) & FRC(b,c)'],
+
+        ['Bill rolled the drawer open', 'roll-51.3.1', 'Sbj V Obj ResultP', 'Volitional COS', 'directed achievement', 'Sbj V Obj ResultP', "rolled('Bill', 'drawer')", 'Theme-of(y,e) & Component-of(a,Bill) & Component-of(b,drawer) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
+
+        ['I lifted the books onto the table', 'put_direction-9.4', 'Sbj V Obj PathP', 'Volitional Apply', 'directed achievement', 'Sbj V Obj PathP', "lifted('I', 'books', 'table')", 'Theme-of(y,e) & Component-of(a,I) & Component-of(b,books) & Component-of(c,table) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & +MER(q2) & EXIST(q3) & FRC(a,b) & PTH(b,c)'],
+
+        ['My computer connected to his computer', 'mix-22.1-2-1', 'Sbj V PathP', 'Autonomous Apply', 'directed achievement', 'Sbj V PathP', "connected('computer', 'computer')", 'Theme-of(x,e) & Component-of(a,computer) & Component-of(b,computer) & DirAch(a,i,j,q1) & InhStPh(b,i,k,q2) & +MER(q1) & EXIST(q2) & PTH(a,b)'],
+
+        ['The sky cleared', 'clear-10.3-1', 'Sbj V', 'Autonomous COS', 'directed achievement', 'Sbj V', "cleared('sky',)", 'Theme-of(x,e) & Component-of(a,sky) & DirAch(a,i,j,q1) & COS(q1)'],
+
+        ['The cat clawed the couch to pieces with her sharp nails', 'swat-18.2', 'Sbj V Obj ResultP with Obl', 'Instrument COS', 'nonincremental accomplishment', 'Sbj V Obj ResultP with Obl', "clawed('cat', 'nails', 'couch')", 'Theme-of(z,e) & Component-of(a,cat) & Component-of(b,nails) & Component-of(c,couch) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & NonIncrAcc(c,i,l,q3) & VOL(q1) & COS(q3) & FRC(a,b) & FRC(b,c)'],
+
+        ['The hammer hit the window to pieces', 'hit-18.1', 'Sbj V Obj ResultP', 'Physical COS', 'directed achievement', 'Sbj V Obj ResultP', "hit('hammer', 'window')", 'Theme-of(y,e) & Component-of(a,hammer) & Component-of(b,window) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & COS(q2) & FRC(a,b)'],
+
+        ['The Romans destroyed the city', 'destroy-44', 'Sbj V Obj', 'Volitional COS', 'directed achievement', 'Sbj V Obj', "destroyed('Romans', 'city')", 'Theme-of(y,e) & Component-of(a,Romans) & Component-of(b,city) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)']
+
+];
 
 
     // the aspect objects
@@ -264,7 +307,7 @@
 
                                         "bcr-labels" : {"b" : [{"x":0, "y":height-20}, {"x":-5, "y":height-20}], 
                                                         "c" : [{"x":-1, "y":height-20}, {"x":-1, "y": height-60}],
-                                                        "r" : ["None"]},
+                                                        "r" : [{"x":0,  "y": height-60}, {"x":-5,  "y": height-60}]},
 
                                         "fd1" : {"when-first": {"x":47, "y":height-60}, "when-second": {"x":47, "y":height-20}},
 
@@ -781,30 +824,7 @@
 
         // var eventComponents = parsePredCalc(inputPredCalc);
 
-
-        var events = [
-                ['Susan cut the recipes from the magazine with a sharp knife', 'Instrument Remove', 'incremental accomplishment', 'Sbj V Obj PathP with Obl', "cut('Susan', 'knife', 'recipes', 'magazine')", 'Theme-of(z,e) & Component-of(a,Susan) & Component-of(b,knife) & Component-of(c,recipes) & Component-of(d,magazine) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & InhStPh(d,i,m,q4) & VOL(q1) & -MER(q3) & FRC(a,b) & FRC(b,c) & PTH(c,d)'],
-
-                ['Doug cleaned the table of dishes', 'Volitional Uncover', 'incremental accomplishment', 'Sbj V Obj of Obl', "cleaned('Doug', 'dishes', 'table')", 'Theme-of(z,e) & Component-of(a,Doug) & Component-of(b,dishes) & Component-of(c,table) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & VOL(q1) & -MER(q3) & FRC(a,b) & PTH(b,c)'],
-
-                ['The books slid from the table to the floor', 'Autonomous Motion', 'incremental accomplishment', 'Sbj V PathP', "slid('books', 'floor')", 'Theme-of(x,e) & Component-of(a,books) & Component-of(b,floor) & IncrAcc(a,i,j,q1) & InhStPh(b,i,k,q2) & MOT(q1) & EXIST(q2) & PTH(a,b)'],
-
-                ['David constructed a house out of sticks', 'Volitional Form', 'nonincremental accomplishment', 'Sbj V Obj from/out of Obl', "constructed('David', 'sticks', 'house')", 'Theme-of(z,e) & Component-of(a,David) & Component-of(b,sticks) & Component-of(c,house) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & NonIncrAcc(c,i,l,q3) & VOL(q1) & DES(q3) & FRC(a,b) & FORM(b,c)'],
-
-                ['Paula hit the ball with a stick', 'Instrument Force', 'cyclic achievement', 'Sbj V Obj with Obl', "hit('Paula', 'stick', 'ball')", 'Theme-of(z,e) & Component-of(a,Paula) & Component-of(b,stick) & Component-of(c,ball) & CycAch(a,i,j,q1) & CycAch(b,i,k,q2) & CycAch(c,i,l,q3) & VOL(q1) & FRC(a,b) & FRC(b,c)'],
-
-                ['Bill rolled the drawer open', 'Volitional COS', 'directed achievement', 'Sbj V Obj ResultP', "rolled('Bill', 'drawer')", 'Theme-of(y,e) & Component-of(a,Bill) & Component-of(b,drawer) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
-
-                ['I lifted the books onto the table', 'Volitional Apply', 'directed achievement', 'Sbj V Obj PathP', "lifted('I', 'books', 'table')", 'Theme-of(y,e) & Component-of(a,I) & Component-of(b,books) & Component-of(c,table) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & +MER(q2) & EXIST(q3) & FRC(a,b) & PTH(b,c)'],
-
-                ['My computer connected to his computer', 'Autonomous Apply', 'directed achievement', 'Sbj V PathP', "connected('computer', 'computer')", 'Theme-of(x,e) & Component-of(a,computer) & Component-of(b,computer) & DirAch(a,i,j,q1) & InhStPh(b,i,k,q2) & +MER(q1) & EXIST(q2) & PTH(a,b)'],
-
-                ['The sky cleared', 'Autonomous COS', 'directed achievement', 'Sbj V', "cleared('sky',)", 'Theme-of(x,e) & Component-of(a,sky) & DirAch(a,i,j,q1) & COS(q1)'],
-
-                ['The cat clawed the couch to pieces with her sharp nails', 'Instrument COS', 'nonincremental accomplishment', 'Sbj V Obj ResultP with Obl', "clawed('cat', 'nails', 'couch')", 'Theme-of(z,e) & Component-of(a,cat) & Component-of(b,nails) & Component-of(c,couch) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & NonIncrAcc(c,i,l,q3) & VOL(q1) & COS(q3) & FRC(a,b) & FRC(b,c)']
-        ];
-
-        var predcalc = events[currentEvent][5];
+        var predcalc = events[currentEvent][7];
 
         
         var eventComponents = parsePredCalc(predcalc);
@@ -829,7 +849,7 @@
 
 
         // recordObjects keeps a history of the objects for drawing of FD lines
-        var recordObjects = []
+        var recordObjects = [];
 
 
         //Start composing subevents
@@ -871,7 +891,6 @@
             var addingText = addText(svgContainer, thisSubevent, subeventArray);
 
 
-
             // only draw FD lines after the second subevent has been drawn
             if (i > 0) {
 
@@ -894,7 +913,7 @@
                 // checking for PTH and drawing arrows
                 var prevSubEvent = eventComponents[i-1];
                 for (i in prevSubEvent) {
-                    if (prevSubEvent[i]==='PTH') {
+                    if (prevSubEvent[i]==='FRC') {
                         var drawArrows = drawPathArrows(svgContainer, subEvent2);
                     }
                 }
@@ -907,14 +926,18 @@
         }
 
         // var sentence = events[currentEvent][0];
-        // var themeType = events[currentEvent][1];
-        // var aspectType = events[currentEvent][2];
-        // var syntax = events[currentEvent][3];
-        // var predicate = events[currentEvent][4];
+        // var themeType = events[currentEvent][3];
+        // var aspectType = events[currentEvent][4];
+        // var syntax = events[currentEvent][5];
+        // var predicate = events[currentEvent][6];
 
-        for (var n=0; n<6; n++) {
-            var addedSentence = addSecondDivText(events[currentEvent][n]);
-            var addedBlank = addSecondDivText('');
+        for (n=0; n<8; n++) {
+
+            var labels = ['Example: ', 'VerbNet class: ', 'VerbNet case frames: ', 'Force-dynamic annotation: ', 'Aspect annotation: ', 'Argument Structure Construction: ', 'Participant mapping: ', 'Predicate calculus representation: '];
+
+            var addedHeader = addSecondDivText(labels[n], true);
+            var addedSentence = addSecondDivText(events[currentEvent][n], false);
+            var addedBlank = addSecondDivText('', false);
         }
 
         generateDiagram.addEventListener('click', resetScreen);
