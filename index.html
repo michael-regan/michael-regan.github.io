@@ -166,11 +166,11 @@
     // the event representations
 
     var events = [
-        ['Susan cut the recipes from the magazine with a sharp knife', 'cut-21.1', 'NP V NP PP.source PP.instrument', 'Instrument Remove', 'incremental accomplishment', 'Sbj V Obj PathP with Obl', "cut('Susan', 'knife', 'recipes', 'magazine')", 'Theme-of(z,e) & Component-of(a,Susan) & Component-of(b,knife) & Component-of(c,recipes) & Component-of(d,magazine) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & InhStPh(d,i,m,q4) & VOL(q1) & -MER(q3) & FRC(a,b) & FRC(b,c) & PTH(c,d)'],
+        ['Susan cut the recipes from the magazine with a sharp knife', 'cut-21.1', 'NP V NP PP.source PP.instrument', 'Instrument Remove', 'incremental accomplishment', 'Sbj V Obj PathP with Obl', "cut('Susan', 'knife', 'recipes', 'magazine')", 'Theme-of(z,e) & Component-of(a,Susan) & Component-of(b,knife) & Component-of(c,recipes) & Component-of(d,magazine) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & InhStPh(d,i,m,q4) & VOL(q1) & -MER(q3) & EXST(q4) & FRC(a,b) & FRC(b,c) & PTH(c,d)'],
 
         ['Doug cleaned the table of dishes', 'clear-10.3', 'NP V NP.location PP.theme', 'Volitional Uncover', 'incremental accomplishment', 'Sbj V Obj of Obl', "cleaned('Doug', 'dishes', 'table')", 'Theme-of(z,e) & Component-of(a,Doug) & Component-of(b,dishes) & Component-of(c,table) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & VOL(q1) & -MER(q3) & FRC(a,b) & PTH(b,c)'],
 
-        ['The books slid from the table to the floor', 'slide-11.2', 'NP V PP.initial_location PP.destination', 'Autonomous Motion', 'incremental accomplishment', 'Sbj V PathP', "slid('books', 'floor')", 'Theme-of(x,e) & Component-of(a,books) & Component-of(b,floor) & IncrAcc(a,i,j,q1) & InhStPh(b,i,k,q2) & MOT(q1) & EXIST(q2) & PTH(a,b)'],
+        ['The books slid from the table to the floor', 'slide-11.2', 'NP V PP.initial_location PP.destination', 'Autonomous Motion', 'incremental accomplishment', 'Sbj V PathP', "slid('books', 'floor')", 'Theme-of(x,e) & Component-of(a,books) & Component-of(b,floor) & IncrAcc(a,i,j,q1) & InhStPh(b,i,k,q2) & MOT(q1) & EXST(q2) & PTH(a,b)'],
 
         ['David constructed a house out of sticks', 'create-26.4', 'NP V NP PP.material', 'Volitional Form', 'nonincremental accomplishment', 'Sbj V Obj from/out of Obl', "constructed('David', 'sticks', 'house')", 'Theme-of(z,e) & Component-of(a,David) & Component-of(b,sticks) & Component-of(c,house) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & NonIncrAcc(c,i,l,q3) & VOL(q1) & DES(q3) & FRC(a,b) & FORM(b,c)'],
 
@@ -178,9 +178,9 @@
 
         ['Bill rolled the drawer open', 'roll-51.3.1', 'NP V NP ADJ', 'Volitional COS', 'directed achievement', 'Sbj V Obj ResultP', "rolled('Bill', 'drawer')", 'Theme-of(y,e) & Component-of(a,Bill) & Component-of(b,drawer) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
 
-        ['I lifted the books onto the table', 'put_direction-9.4', 'NP V NP PP.destination', 'Volitional Apply', 'directed achievement', 'Sbj V Obj PathP', "lifted('I', 'books', 'table')", 'Theme-of(y,e) & Component-of(a,I) & Component-of(b,books) & Component-of(c,table) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & +MER(q2) & EXIST(q3) & FRC(a,b) & PTH(b,c)'],
+        ['I lifted the books onto the table', 'put_direction-9.4', 'NP V NP PP.destination', 'Volitional Apply', 'directed achievement', 'Sbj V Obj PathP', "lifted('I', 'books', 'table')", 'Theme-of(y,e) & Component-of(a,I) & Component-of(b,books) & Component-of(c,table) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & +MER(q2) & EXST(q3) & FRC(a,b) & PTH(b,c)'],
 
-        ['My computer connected to his computer', 'mix-22.1-2-1', 'NP V PP.patient', 'Autonomous Apply', 'directed achievement', 'Sbj V PathP', "connected('computer', 'computer')", 'Theme-of(x,e) & Component-of(a,computer) & Component-of(b,computer) & DirAch(a,i,j,q1) & InhStPh(b,i,k,q2) & +MER(q1) & EXIST(q2) & PTH(a,b)'],
+        ['My computer connected to his computer', 'mix-22.1-2-1', 'NP V PP.patient', 'Autonomous Apply', 'directed achievement', 'Sbj V PathP', "connected('computer', 'computer')", 'Theme-of(x,e) & Component-of(a,computer) & Component-of(b,computer) & DirAch(a,i,j,q1) & InhStPh(b,i,k,q2) & +MER(q1) & EXST(q2) & PTH(a,b)'],
 
         ['The sky cleared', 'clear-10.3-1', 'NP.location V', 'Autonomous COS', 'directed achievement', 'Sbj V', "cleared('sky',)", 'Theme-of(x,e) & Component-of(a,sky) & DirAch(a,i,j,q1) & COS(q1)'],
 
