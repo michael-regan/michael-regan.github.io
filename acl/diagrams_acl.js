@@ -1191,6 +1191,12 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
 
         }
 
+        // changing last point in the array so that its y-coordinate matches the second-to-lasts
+
+        var ycoordSecondToLast = allThePointsForParticipantInArray[allThePointsForParticipantInArray.length-2]["y"];
+        allThePointsForParticipantInArray[allThePointsForParticipantInArray.length-1]["y"] = ycoordSecondToLast;
+
+
 
         console.log(allThePointsForParticipantInArray);
 
