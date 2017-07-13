@@ -3,23 +3,16 @@ var lineFunction = d3.line()
                           .x(function(d) { return d.x; })
                           .y(function(d) { return d.y; });
 
-// var events = [
-//         ['Doug cut the recipes from the magazine with a sharp knife', 'Instrument Remove', 'incremental accomplishment', 'Sbj V Obj PathP with Obl', "cut('Doug', 'knife', 'recipes', 'magazine')", 'Theme-of(z,e) & Component-of(a,Doug) & Component-of(b,knife) & Component-of(c,recipes) & Component-of(d,magazine) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & InhStPh(d,i,m,q4) & VOL(q1) & -MER(q3) & FRC(a,b) & FRC(b,c) & PTH(c,d)'],
-
-//         ['Doug cleaned the table of books', 'Volitional Uncover', 'incremental accomplishment', 'Sbj V Obj of Obl', "cleaned('Doug', 'books', 'table')", 'Theme-of(z,e) & Component-of(a,Doug) & Component-of(b,books) & Component-of(c,table) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & VOL(q1) & -MER(q3) & FRC(a,b) & PTH(b,c)'],
-
-//         ['The books slid from the table to the floor', 'Autonomous Motion', 'incremental accomplishment', 'Sbj V PathP', "slid('books', 'floor')", 'Theme-of(x,e) & Component-of(a,books) & Component-of(b,floor) & IncrAcc(a,i,j,q1) & InhStPh(b,i,k,q2) & MOT(q1) & EXIST(q2) & PTH(a,b)']
-// ];
 
 var events = [
         
-    ['and another guy picks up the rock,', 'get-13.5.1', 'Sbj V Obj DNI-1', 'Volitional Motion', 'directed achievement', 'Sbj V Obj DNI', "picks('guy', 'rock', 'DNI-1')", 'Theme-of(y,e) & Component-of(a,guy) & Component-of(b,rock) & Component-of(c,DNI-1) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & MOT(q2) & EXIST(q3) & FRC(a,b) & PTH(b,c)'],
+    ['and another guy picks up the rock [from the road],', 'get-13.5.1', 'Sbj V Obj DNI-1', 'Volitional Remove', 'directed achievement', 'Sbj V Obj DNI', "picks('guy', 'rock', 'road')", 'Theme-of(y,e) & Component-of(a,guy) & Component-of(b,rock) & Component-of(c,road) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & -MER(q2) & EXST(q3) & FRC(a,b) & PTH(b,c)'],
 
-    ['and he throws it out of the road,', 'throw-17.1', 'Sbj V Obj PathP', 'Volitional Remove', 'directed achievement', 'Sbj V Obj PathP', "throws('guy', 'rock', 'road')", 'Theme-of(y,e) & Component-of(a,guy) & Component-of(b,rock) & Component-of(c,road) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & -MER(q2) & EXIST(q3) & FRC(a,b) & PTH(b,c)'],
+    ['and he [the guy] throws it out of the road,', 'throw-17.1', 'Sbj V Obj PathP', 'Volitional Motion', 'directed achievement', 'Sbj V Obj PathP', "throws('guy', 'rock', 'road')", 'Theme-of(y,e) & Component-of(a,guy) & Component-of(b,rock) & Component-of(c,road) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & MOT(q2) & EXST(q3) & FRC(a,b) & PTH(b,c)'],
 
-    ['and he gets all situated again,', 'become-109.1', 'Sbj V', 'Self-volitional Internal', 'incremental accomplishment', 'Sbj V', "gets('he')", 'Theme-of(x,e) & Component-of(a,he) & IncrAcc(a,i,j,q1) & VOL(q1) & INT(q1)'],
+    ['and he [the boy] gets all situated again,', 'become-109.1', 'Sbj V', 'Self-volitional Internal', 'incremental accomplishment', 'Sbj V', "gets('he')", 'Theme-of(x,e) & Component-of(a,he) & IncrAcc(a,i,j,q1) & VINT(q1) & INT(q1)'],
 
-    ['and he . . takes off', 'escape-51.1', 'Sbj V DNI-2', 'Self-volitional Motion', 'directed achievement', 'Sbj V DNI', "takes off('he', 'DNI-2')", 'Theme-of(x,e) & Component-of(a,he) & Component-of(b,DNI-2) & DirAch(a,i,j,q1) & InhStPh(b,i,k,q2) & VOL(q1) & MOT(q1) & EXIST(q2) & PTH(a,b)']
+    ['and he [the boy] takes off [from here]', 'escape-51.1', 'Sbj V DNI', 'Self-volitional Motion', 'directed achievement', 'Sbj V DNI', "takes off('he', 'here')", 'Theme-of(x,e) & Component-of(a,he) & Component-of(b,here) & DirAch(a,i,j,q1) & InhStPh(b,i,k,q2) & VOL(q1) & MOT(q1) & EXST(q2) & PTH(a,b)']
 
 ];
 
@@ -433,6 +426,26 @@ function addPathForceLabels(svgContainer, subEvent1, subEvent2, prevSubEvent) {
 // x1 is the x-translation factor
 function drawAxes (svgContainer, height, aspectHeight, includeXaxis, x1) {
 
+
+    //hacky height is the upper part of the y-axis, while height adjusts the bottom part
+    if (aspectHeight == 80) {
+
+        var hackyHeight = height-aspectHeight+10;
+        height = height-10;
+
+    } else if (aspectHeight == 100) {
+
+        var hackyHeight = height-aspectHeight-10;
+        height = height-10;
+
+    } else if (aspectHeight == 60) {
+
+        var hackyHeight = height-aspectHeight-20;
+        height = height-10;
+        
+    }
+
+
     if (includeXaxis) {
 
         var xAxis = [   {"x": 0+x1, "y":height},
@@ -444,24 +457,6 @@ function drawAxes (svgContainer, height, aspectHeight, includeXaxis, x1) {
                 .attr("stroke-width", 1)
                 .attr("fill", "none");
     };
-
-    //hacky height is the upper part of the y-axis, while height adjusts the bottom part
-    if (aspectHeight == 80) {
-
-        var hackyHeight = height-aspectHeight+10;
-        height = height;
-
-    } else if (aspectHeight == 100) {
-
-        var hackyHeight = height-aspectHeight-10;
-        height = height-10;
-
-    } else if (aspectHeight == 60) {
-
-        var hackyHeight = height-aspectHeight-20;
-        height = height-20;
-        
-    }
 
 
     var yAxis = [   {"x": 0+x1, "y":hackyHeight},
@@ -493,20 +488,20 @@ function addText (svgContainer, myAspectObject, subeventArray) {
     var r = myAspectObject["bcr-labels"]["r"];
 
 
-    if (c[0]!='None') {
+    // if (c[0]!='None') {
 
-        var addParticipantText = svgContainer.append("text")
-                                    .attr("x", c[1]["x"]-55-strLen)
-                                    .attr("y", (1/2)*(c[0]["y"]+c[1]["y"])+3)
-                                    .text(participant);
+    //     var addParticipantText = svgContainer.append("text")
+    //                                 .attr("x", c[1]["x"]-55-strLen)
+    //                                 .attr("y", (1/2)*(c[0]["y"]+c[1]["y"])+3)
+    //                                 .text(participant);
 
-    } else if (r[0]!="None") {
+    // } else if (r[0]!="None") {
 
-        var addParticipantText = svgContainer.append("text")
-                                    .attr("x", r[1]["x"]-60-strLen/5)
-                                    .attr("y", r[1]["y"]+3)
-                                    .text(participant);
-    }
+    //     var addParticipantText = svgContainer.append("text")
+    //                                 .attr("x", r[1]["x"]-60-strLen/5)
+    //                                 .attr("y", r[1]["y"]+3)
+    //                                 .text(participant);
+    // }
 
     if (theme!==undefined && theme != 'FRC' && theme != 'PTH') {
 
@@ -529,64 +524,49 @@ function addText (svgContainer, myAspectObject, subeventArray) {
 }
 
 
-function addDashedPath(dottedLines1, dottedLines2, inner=true, sendToTop=false) {
+function collectPoints(dottedLines1, dottedLines2, inner=true, sendToTop=false, indexParticipant) {
 
-    // adding lines between participants
+    // collecting the points for each coreferential line, putting them into an array
+    // indexParticipant adds the index (one of them to each array so that each line can be drawn all at one)
+    // form of pathinfo then will be: array(dict, dict, int)
 
 
     pathinfo = [{x:dottedLines1[0]["x"], y:dottedLines1[0]["y"]},
                 {x:dottedLines2[0]["x"], y:dottedLines2[0]["y"]}];
 
-    // pathinfo = [[dottedLines1[0]["x"], dottedLines1[0]["y"]],
-    //             [dottedLines2[0]["x"], dottedLines2[0]["y"]]];
-
-    if (inner == true && sendToTop == false) {
-        pathinfo.splice(1,0,{x:(dottedLines1[0]["x"]+dottedLines2[0]["x"])/2, y:(dottedLines1[0]["y"]+dottedLines2[0]["y"]-15)/2 });
-        pathinfo.splice(1,0,{x:((dottedLines1[0]["x"]+dottedLines2[0]["x"])-35)/2, y:(dottedLines1[0]["y"]+dottedLines2[0]["y"]+15)/2 });
-
-    } else if (inner == false && sendToTop == false ){
-
-
-    } 
-    // else {
-
-    //     // for participants that do not corefer
-    //     // pathinfo.splice(1,0,{x:(dottedLines1[0]["x"]+dottedLines2[0]["x"])/2, y:(dottedLines1[0]["y"]+dottedLines2[0]["y"]-100)/2 });
-    //     // pathinfo.splice(1,0,{x:((dottedLines1[0]["x"]+dottedLines2[0]["x"])-100)/2, y:(dottedLines1[0]["y"]+dottedLines2[0]["y"]-100)/2 });
-
-    //     pathinfo.push( [ (dottedLines1[0]["x"]+dottedLines2[0]["x"])/2, (dottedLines1[0]["y"]+dottedLines2[0]["y"]-100)/2 ] );
-    //     pathinfo.push( [ ((dottedLines1[0]["x"]+dottedLines2[0]["x"])-100)/2, (dottedLines1[0]["y"]+dottedLines2[0]["y"]-100)/2 ] );
-
-    //     //points = {x:((dottedLines1[0]["x"]+dottedLines2[0]["x"])-100)/2, y:(dottedLines1[0]["y"]+dottedLines2[0]["y"]-100)/2 }
-
-    // }
+    pathinfo.push(indexParticipant);
 
     points4coreference.push(pathinfo);
 
 }
 
 
-function addPoints4Coreference (arr) {
+function addPoints4Coreference (arr, colorIndex, participants) {
 
     // Creating path using data in pathinfo and path data generator d3line.
-        
-    // svgContainer.append("svg:path")
-    //     .attr("d", d3line(arr[i]))
-    //     .attr("class", "line")
-    //     .style("stroke-dasharray", ("8, 5"))
-    //     .style("stroke-width", 1)
-    //     .style("stroke", "#FFBBCC")
-    //     .style("fill", "none");
+
+    var colors = ['blue', 'DarkMagenta', 'DarkOrange', 'Aqua'];
+
+    var color = colors[colorIndex];
 
     var lineGenerator = d3.line().curve(d3.curveCatmullRom.alpha(1.0))
         .x(function(d) { return d.x; })
         .y(function(d) { return d.y; }); 
-
-    svgContainer.selectAll("spath")
-        .data(arr)
-        .enter().append("path")
+        
+    svgContainer.append("svg:path")
+        .attr("d", lineGenerator(arr))
         .attr("class", "line")
-        .attr("d", lineGenerator); 
+        .style("stroke-dasharray", ("10, 6"))
+        .style("stroke-width", 3)
+        .style("opacity", 1.0)
+        .style("stroke", color)
+        .style("fill", "none")
+        .on("mouseover", function(d){
+              d3.select(this).style("stroke", "black").style("stroke-width", 5)
+            })
+        .on("mouseout", function(d){
+              d3.select(this).style("stroke", color).style("stroke-width", 3);
+            });
 
     // Define the div for the tooltip
     var tooldiv = d3.select("body").append("tooldiv")   
@@ -597,11 +577,22 @@ function addPoints4Coreference (arr) {
     var points4Text = [];
 
     for (i=0; i<arr.length; i++) {
-        var thisArr = arr[i];
-        if (thisArr[0]["x"]==0) {
-            points4Text.push(thisArr[0]);
+        var thisObj = arr[i];
+        if (thisObj.x==0) {
+            points4Text.push(thisObj);
         }
     }
+
+    // finding the actual participant from participants and then removing all identical items
+    var currentParticipant = participants.shift();
+
+    for (index in participants) {
+
+        if (participants[index]==currentParticipant) {
+            participants.splice(index, 1);
+        }
+    }
+
 
     svgContainer.selectAll("dot")    
         .data(points4Text)         
@@ -613,7 +604,7 @@ function addPoints4Coreference (arr) {
             tooldiv.transition()        
                 .duration(200)      
                 .style("opacity", .9);  
-            tooldiv .html('<p>'+d.x + '<br/>'  + 'Mine'+'</p>')
+            tooldiv .html('<h1>'+currentParticipant+'</h1>')
                 .style("left", (d3.event.pageX) + "px")     
                 .style("top", (d3.event.pageY - 28) + "px");         
             }) 
@@ -622,7 +613,6 @@ function addPoints4Coreference (arr) {
                 .duration(500)      
                 .style("opacity", 0);   
         });
-
 
 }
 
@@ -650,7 +640,6 @@ function getHeight(allAspects) {
 
 function parsePredCalc (myPredCalc) {
 
-    // form ("None" if none): [[q1PartAspectThemeFD], [q2PartAspectThemeFD], [q3PartAspectThemeFD], [q4PartAspectThemeFD], [aspectSummary]]
     var eventInfo = []
 
     var string_split = myPredCalc.split('&');
@@ -793,8 +782,13 @@ function draw (event) {
     strList = str.split(",");
 
     // allParticipantsList is global
+
+    // for labelling
+    var localParticipantList = [];
+
     for (p in strList) {
         allParticipantsList.push(strList[p].trim())
+        localParticipantList.push(strList[p].trim());
     }
     // ENDOF COREFERENCE LINKS SUBROUTINE
   
@@ -827,8 +821,16 @@ function draw (event) {
 
         var thisSubevent = objects[thisAspect];
 
+        //adding specific event elements for labelling
+        thisSubevent["sentence"]=event[0];
+        thisSubevent["participants"]=localParticipantList;
+
+        // reinitializing for next subevent
+        localParticipantList= [];
+
         // global
         historySubevents.push(thisSubevent);
+
 
         if (i == 0) {
             var thisAxis = drawAxes(svgContainer, thisHeight, thisAspectHeight, true, x1);
@@ -899,6 +901,9 @@ function prepareLinks4Coreference (historySubevents, indexCorefLinks, inner=true
             var dashedLines1 = [];
             var dashedLines2 = [];
 
+            // this will help the participant lines to be drawn all at once
+            var indexParticipant = indexCorefLinks[j][0];
+
             var e1 = historySubevents[indexCorefLinks[j][0]];
             var e2 = historySubevents[indexCorefLinks[j][1]];
             
@@ -907,7 +912,7 @@ function prepareLinks4Coreference (historySubevents, indexCorefLinks, inner=true
             // notice here that slice is not used-->the first set of coordinates of dotted-beg is used
             dashedLines2.push(e2["dotted-beg"][0]);
 
-            var addLinesBetweenParticipants = addDashedPath(dashedLines1, dashedLines2, true, false);
+            var addLinesBetweenParticipants = collectPoints(dashedLines1, dashedLines2, true, false, indexParticipant);
 
         }
     } else {
@@ -917,6 +922,8 @@ function prepareLinks4Coreference (historySubevents, indexCorefLinks, inner=true
             //first the left hand side of the link
             var dashedLines1 = [];
             var dashedLines2 = [];
+
+            var indexParticipant = indexCorefLinks[k][0];
 
             // recall that index0 is the first subevent of the coreferring pair, i.e. index 0 of [0, 4]
             var e1 = historySubevents[indexCorefLinks[k][0]];
@@ -928,15 +935,16 @@ function prepareLinks4Coreference (historySubevents, indexCorefLinks, inner=true
             dashedLines2.push(e1["dotted-beg"][0]);
 
             if (sendToTop == false) {
-                var addLeftLines2Participants = addDashedPath(dashedLines1, dashedLines2, false, false);
+                var addLeftLines2Participants = collectPoints(dashedLines1, dashedLines2, false, false, indexParticipant);
             } else {
-                var addLeftLines2Participants = addDashedPath(dashedLines1, dashedLines2, false, false);
+                var addLeftLines2Participants = collectPoints(dashedLines1, dashedLines2, false, false, indexParticipant);
             }
 
             // now the right hand side of the link
 
             var e2 = historySubevents[indexCorefLinks[k][1]];
-            var rightMarginPts = { "x": 1000-x1/10,  "y": e2["dotted-end"].slice(-1)[0]["y"]/1.2};
+            // increasing the right margin by value 'k' is an arbitray choice; it is simply the index of the subevent
+            var rightMarginPts = { "x": 1000-x1/10,  "y": e2["dotted-end"].slice(-1)[0]["y"]+10*k};
             dashedLines1 = [];
             dashedLines2 = [];
 
@@ -944,9 +952,9 @@ function prepareLinks4Coreference (historySubevents, indexCorefLinks, inner=true
             dashedLines2.push(rightMarginPts);
 
             if (sendToTop == false) {
-                var addRightLines2Participants = addDashedPath(dashedLines1, dashedLines2, false, false);
+                var addRightLines2Participants = collectPoints(dashedLines1, dashedLines2, false, false, indexParticipant);
             } else {
-                var addRightLines2Participants = addDashedPath(dashedLines1, dashedLines2, false, true);
+                var addRightLines2Participants = collectPoints(dashedLines1, dashedLines2, false, true, indexParticipant);
             }
 
         }
@@ -965,8 +973,8 @@ function uniq(a) {
 
 function drawCoreferenceLinks (historySubevents, allParticipantsList) {
 
-    // console.log(historySubevents);
     //console.log(allParticipantsList);
+    // console.log(historySubevents);
 
     // an array of arrays for all items that have coreferences
     var indexCorefLinks = [];
@@ -1003,15 +1011,149 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
         indexesNotCoref.push([num, num]);
     }
 
+    //console.log(indexCorefLinks);
+
     var addCoreferOuterLinks = prepareLinks4Coreference(historySubevents, indexCorefLinks, false, false);
     var addInnerLinks = prepareLinks4Coreference(historySubevents, indexCorefLinks, true, false);
     
+    // at this point, points4coreference is of form array(dict, dict, int); I want to group these and send them to be drawn one by one
 
-    //var addLinksNotCoref = prepareLinks4Coreference(historySubevents, indexesNotCoref, false, true);
+    // groupedByIndexPoints has form array(arr, arr, arr...) with the # of inner arrays = # of participants
+    var groupedByIndexPoints = [];
 
-    console.log(points4coreference);
-    var addPoints = addPoints4Coreference(points4coreference);
+    // this will be reinitialized at the end of the following for loop
+    var participantGroupedPoints = [];
 
+    // keeping track of indexes of participants already grouped
+    var alreadyGrouped = [];
+
+    for (i1 in points4coreference) {
+
+        if (alreadyGrouped.indexOf(i1)==-1) {
+
+            alreadyGrouped.push(i1);
+
+            firstListPoints = points4coreference[i1].slice(0,-1);
+            thisPartIndex = points4coreference[i1].slice(-1)[0];
+
+            participantGroupedPoints.push(firstListPoints);
+
+            for (i2 in points4coreference) {
+
+                if (alreadyGrouped.indexOf(i2)==-1) {
+                    nextListPoints = points4coreference[i2].slice(0,-1);
+                    innerLoopPartIndex = points4coreference[i2].slice(-1)[0];
+
+                    if (thisPartIndex===innerLoopPartIndex) {
+
+                        alreadyGrouped.push(i2);
+                        participantGroupedPoints.push(nextListPoints);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        if (participantGroupedPoints.length>0) {
+            groupedByIndexPoints.push(participantGroupedPoints);
+            participantGroupedPoints = [];  
+        }
+
+    }
+
+    var finalArraySortedPoints4Drawing = [];
+    var sentence = [];
+    // var participants = [];
+
+    //console.log(groupedByIndexPoints);
+
+    for (obj in groupedByIndexPoints) {
+
+        var allThePointsForParticipantInArray = [];
+
+        for (arr in groupedByIndexPoints[obj]) {
+
+            for (point in groupedByIndexPoints[obj][arr]) {
+
+                allThePointsForParticipantInArray.push(groupedByIndexPoints[obj][arr][point]);
+
+            }
+        }
+
+
+        // adding all the points specific to each subevent (aspectual lines)
+        for (i in historySubevents) {
+
+            for (j in allThePointsForParticipantInArray) {
+
+                var setPointsToBeMatched = allThePointsForParticipantInArray[j];
+                var dottedBegIndexZero = historySubevents[i]["dotted-beg"][0];
+
+
+                if (setPointsToBeMatched["x"]==dottedBegIndexZero["x"] && setPointsToBeMatched["y"]==dottedBegIndexZero["y"] ) {
+
+                    for (a in historySubevents[i]["dotted-beg"]) {
+                        allThePointsForParticipantInArray.push(historySubevents[i]["dotted-beg"][a]);
+                    }
+
+                    for (b in historySubevents[i]["solid"]) {
+                        allThePointsForParticipantInArray.push(historySubevents[i]["solid"][b]);
+                    }
+
+                    for (c in historySubevents[i]["dotted-end"]) {
+                        allThePointsForParticipantInArray.push(historySubevents[i]["dotted-end"][c]);
+                    }
+
+                    if (sentence.indexOf(historySubevents[i]["sentence"])==-1) {
+                        sentence.push(historySubevents[i]["sentence"]);
+                    }
+
+                }
+
+            }
+
+        }
+
+        // outputs array of sorted points by x-value
+        allThePointsForParticipantInArray.sort(function(a, b) {
+            return a.x - b.x;
+        });
+
+        // inserting a point above for those subevents that occur later in order that the line intersect less
+        if (allThePointsForParticipantInArray[1]["x"]>450) {
+            higherPt = {x: 250, y: 10};
+            allThePointsForParticipantInArray.splice(1, 0, higherPt);
+        }
+
+
+        // inserting a point above for those subevents that occur only earlier in order that the line intersect less
+
+        var last_element = allThePointsForParticipantInArray[allThePointsForParticipantInArray.length - 1];
+        var second_to_last = allThePointsForParticipantInArray[allThePointsForParticipantInArray.length - 2];
+
+
+        if (last_element["x"]-second_to_last["x"]>400 && last_element["y"]<200) {
+            new_x = (last_element["x"]+second_to_last["x"])/1.8;
+            higherPt = {x: new_x, y: 10};
+            allThePointsForParticipantInArray.splice(-1, 0, higherPt);
+        }
+
+        finalArraySortedPoints4Drawing.push(allThePointsForParticipantInArray);
+
+    }
+
+    console.log(sentence);
+
+    for (xx in finalArraySortedPoints4Drawing) {
+
+        //sending index (as 'points') for color selection
+        var addPoints = addPoints4Coreference(finalArraySortedPoints4Drawing[xx], xx, allParticipantsList);
+
+    }
+       
 }
 
 

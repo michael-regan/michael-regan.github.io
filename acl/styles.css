@@ -37,6 +37,7 @@ circle,
   animation: dash 3s linear forwards;
 }
 
+
 @keyframes dash {
   to {
     stroke-dashoffset: 0;
@@ -54,7 +55,7 @@ circle {
   position: absolute;     
   text-align: center;     
   width: 80px;          
-  height: 50px;         
+  height: 60px;         
   padding: 2px;       
   font: 12px sans-serif;    
   background: lightsteelblue; 
@@ -64,12 +65,12 @@ circle {
 }
 
 .button {
-    background-color: #008CBA; /* Blue */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+  background-color: #008CBA; /* Blue */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
