@@ -459,17 +459,6 @@ function addPathForceLabels(svgContainer, subEvent1, subEvent2, prevSubEvent) {
 
 function drawAxes (svgContainer, height, aspectHeight, includeXaxis) {
 
-    if (includeXaxis) {
-
-        var xAxis = [   {"x": 0, "y":height},
-                        {"x": 120, "y":height}];
-
-        var xline = svgContainer.append("path")
-                .attr("d", lineFunction(xAxis))
-                .attr("stroke", "black")
-                .attr("stroke-width", 1)
-                .attr("fill", "none");
-    };
 
     //hacky height is the upper part of the y-axis, while height adjusts the bottom part
     if (aspectHeight == 80) {
@@ -488,6 +477,18 @@ function drawAxes (svgContainer, height, aspectHeight, includeXaxis) {
         height = height-20;
         
     }
+
+    if (includeXaxis) {
+
+        var xAxis = [   {"x": 0, "y":height},
+                        {"x": 120, "y":height}];
+
+        var xline = svgContainer.append("path")
+                .attr("d", lineFunction(xAxis))
+                .attr("stroke", "black")
+                .attr("stroke-width", 1)
+                .attr("fill", "none");
+    };
 
 
     var yAxis = [   {"x": 0, "y":hackyHeight},
