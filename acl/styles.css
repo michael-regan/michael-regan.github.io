@@ -34,7 +34,7 @@ circle,
   stroke-opacity:0.5;
   stroke-dasharray: 500;
   stroke-dashoffset: 1000;
-  animation: dash 3s linear forwards;
+/*  animation: dash 3s linear forwards;*/
 }
 
 
@@ -54,14 +54,14 @@ circle {
 .tooltip { 
   position: absolute;     
   text-align: center;     
-  width: 80px;          
+  width: 60px;          
   height: 60px;         
   padding: 2px;       
   font: 12px sans-serif;    
   background: lightsteelblue; 
   border: 0px;    
   border-radius: 8px;     
-  pointer-events: none;     
+  pointer-events: none;   
 }
 
 .button {

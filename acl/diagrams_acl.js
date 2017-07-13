@@ -545,27 +545,33 @@ function addPoints4Coreference (arr, colorIndex, participants) {
 
     // Creating path using data in pathinfo and path data generator d3line.
 
-    var colors = ['blue', 'DarkMagenta', 'DarkOrange', 'Aqua'];
+    var colors = ['Red', 'DarkMagenta', 'DarkOrange', 'Green'];
 
     var color = colors[colorIndex];
 
-    var lineGenerator = d3.line().curve(d3.curveCatmullRom.alpha(1.0))
+    // var lineGenerator = d3.line().curve(d3.curveCatmullRom.alpha(0.01))
+    //     .x(function(d) { return d.x; })
+    //     .y(function(d) { return d.y; }); 
+
+
+    var lineGenerator = d3.line()
         .x(function(d) { return d.x; })
-        .y(function(d) { return d.y; }); 
-        
+        .y(function(d) { return d.y; });
+
+
     svgContainer.append("svg:path")
         .attr("d", lineGenerator(arr))
         .attr("class", "line")
-        .style("stroke-dasharray", ("10, 6"))
-        .style("stroke-width", 3)
+        .style("stroke-dasharray", ("2, 2"))
+        .style("stroke-width", 1)
         .style("opacity", 1.0)
         .style("stroke", color)
         .style("fill", "none")
         .on("mouseover", function(d){
-              d3.select(this).style("stroke", "black").style("stroke-width", 5)
+              d3.select(this).style("stroke", "black").style("stroke-width", 3)
             })
         .on("mouseout", function(d){
-              d3.select(this).style("stroke", color).style("stroke-width", 3);
+              d3.select(this).style("stroke", color).style("stroke-width", 1);
             });
 
     // Define the div for the tooltip
@@ -605,14 +611,16 @@ function addPoints4Coreference (arr, colorIndex, participants) {
                 .duration(200)      
                 .style("opacity", .9);  
             tooldiv .html('<h1>'+currentParticipant+'</h1>')
-                .style("left", (d3.event.pageX) + "px")     
-                .style("top", (d3.event.pageY - 28) + "px");         
-            }) 
-        .on("mouseout", function(d) {       
-            tooldiv.transition()        
-                .duration(500)      
-                .style("opacity", 0);   
-        });
+                .style("left", (100) + "px")     
+                .style("top", (d3.event.pageY - 28) + "px")
+                .style("background", color)
+                .style("opacity", 0.1);        
+            });
+        // .on("mouseout", function(d) {       
+        //     tooldiv.transition()        
+        //         .duration(500)      
+        //         .style("opacity", 0);   
+        // });
 
 }
 
@@ -1066,9 +1074,6 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
 
     var finalArraySortedPoints4Drawing = [];
     var sentence = [];
-    // var participants = [];
-
-    //console.log(groupedByIndexPoints);
 
     for (obj in groupedByIndexPoints) {
 
@@ -1077,7 +1082,6 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
         for (arr in groupedByIndexPoints[obj]) {
 
             for (point in groupedByIndexPoints[obj][arr]) {
-
                 allThePointsForParticipantInArray.push(groupedByIndexPoints[obj][arr][point]);
 
             }
@@ -1093,9 +1097,9 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
                 var dottedBegIndexZero = historySubevents[i]["dotted-beg"][0];
 
 
-                if (setPointsToBeMatched["x"]==dottedBegIndexZero["x"] && setPointsToBeMatched["y"]==dottedBegIndexZero["y"] ) {
+                if ( setPointsToBeMatched["x"]==dottedBegIndexZero["x"] && setPointsToBeMatched["y"]==dottedBegIndexZero["y"] ) {
 
-                    for (a in historySubevents[i]["dotted-beg"]) {
+                    for (a in historySubevents[i]["dotted-beg"]) {                       
                         allThePointsForParticipantInArray.push(historySubevents[i]["dotted-beg"][a]);
                     }
 
@@ -1135,11 +1139,60 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
         var second_to_last = allThePointsForParticipantInArray[allThePointsForParticipantInArray.length - 2];
 
 
-        if (last_element["x"]-second_to_last["x"]>400 && last_element["y"]<200) {
+        if (last_element["x"]-second_to_last["x"]>400 && last_element["y"]<100) {
             new_x = (last_element["x"]+second_to_last["x"])/1.8;
             higherPt = {x: new_x, y: 10};
             allThePointsForParticipantInArray.splice(-1, 0, higherPt);
+        } else if (last_element["x"]-second_to_last["x"]>400 && last_element["y"]>100 && last_element["y"]<200) {
+            new_x = (last_element["x"]+second_to_last["x"])/1.8;
+            lowerPt = {x: new_x, y: 225};
+            allThePointsForParticipantInArray.splice(-1, 0, lowerPt);
         }
+
+
+        // removing duplicates
+        function dedup(arr) {
+            var hashTable = {};
+
+            return arr.filter(function (el) {
+                var key = JSON.stringify(el);
+                var match = Boolean(hashTable[key]);
+
+                return (match ? false : hashTable[key] = true);
+            });
+        }
+
+
+        allThePointsForParticipantInArray = dedup(allThePointsForParticipantInArray);
+
+
+        // for objects with same x-coordinating, ensuring that y-coordinate is sorted properly also
+
+        for (mm in allThePointsForParticipantInArray) {
+
+            if (mm > 0) {
+
+                var currentObj = allThePointsForParticipantInArray[mm];
+                var prevObj = allThePointsForParticipantInArray[mm-1];
+                var twoPrevObj = allThePointsForParticipantInArray[mm-2];
+        
+                if (currentObj["x"]==prevObj["x"] && currentObj["y"]>prevObj["y"] && currentObj["x"]-twoPrevObj["x"]>5) {
+
+                    var removedObj = allThePointsForParticipantInArray.splice(mm-1, 1)[0];
+                    allThePointsForParticipantInArray.splice(mm, 0, removedObj);
+                }
+
+                if (currentObj["x"]==prevObj["x"] && currentObj["y"]<prevObj["y"] && currentObj["x"]-twoPrevObj["x"]<5) {
+
+                    var removedObj = allThePointsForParticipantInArray.splice(mm, 1)[0];
+                    allThePointsForParticipantInArray.splice(mm-1, 0, removedObj);
+                }
+            }
+
+        }
+
+
+        console.log(allThePointsForParticipantInArray);
 
         finalArraySortedPoints4Drawing.push(allThePointsForParticipantInArray);
 
