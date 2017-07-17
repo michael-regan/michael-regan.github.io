@@ -568,7 +568,7 @@ function addPoints4Coreference (arr, colorIndex, participants) {
         .style("stroke", color)
         .style("fill", "none")
         .on("mouseover", function(d){
-              d3.select(this).style("stroke", "black").style("stroke-width", 3)
+              d3.select(this).style("stroke", color).style("stroke-width", 3)
             })
         .on("mouseout", function(d){
               d3.select(this).style("stroke", color).style("stroke-width", 1);
@@ -970,6 +970,19 @@ function prepareLinks4Coreference (historySubevents, indexCorefLinks, inner=true
 }
 
 
+function addSentence2Diagram(sentences) {
+
+    var svgTextBox = d3.select(".diagram").append("svg")
+                                    .attr("width", -200)
+                                    .attr("height", 450);
+
+    var TextSelection = svgTextBox.append("text")
+        .text(sentences[0])
+
+}
+
+
+
 function uniq(a) {
     // input: array with possible duplicates; output: array with no duplicates
     var seen = {};
@@ -1191,20 +1204,18 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
 
         }
 
-        // changing last point in the array so that its y-coordinate matches the second-to-lasts
+        // reducing line crossing: changing last point in the array so that its y-coordinate matches the second-to-lasts
 
         var ycoordSecondToLast = allThePointsForParticipantInArray[allThePointsForParticipantInArray.length-2]["y"];
         allThePointsForParticipantInArray[allThePointsForParticipantInArray.length-1]["y"] = ycoordSecondToLast;
-
-
-
-        console.log(allThePointsForParticipantInArray);
 
         finalArraySortedPoints4Drawing.push(allThePointsForParticipantInArray);
 
     }
 
     console.log(sentence);
+
+    addSentence2Diagram(sentence);
 
     for (xx in finalArraySortedPoints4Drawing) {
 
