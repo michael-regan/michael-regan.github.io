@@ -32,7 +32,7 @@ var selected = [];
 for (var j=0; j<4; j++){
 	var event = events[j];
 	draw(event);
-	x1 += 200;
+	x1 += 225;
 };
 
 // this might be a good spot for drawing the coreferential links
@@ -406,6 +406,8 @@ function addPathForceLabels(svgContainer, subEvent1, subEvent2, prevSubEvent) {
 
         var thisText = prevSubEvent[2];
 
+        console.log(thisText);
+
         var addPthFrcText = svgContainer.append("text")
                                 .attr("x", x+5)
                                 .attr("y", y+5)
@@ -414,6 +416,8 @@ function addPathForceLabels(svgContainer, subEvent1, subEvent2, prevSubEvent) {
     } else if (prevSubEvent[3] == 'PTH' || prevSubEvent[3] == 'FRC') {
 
         var thisText = prevSubEvent[3];
+
+        console.log(thisText);
 
         var addPthFrcText = svgContainer.append("text")
                                 .attr("x", x+5)
@@ -936,11 +940,19 @@ function prepareLinks4Coreference (historySubevents, indexCorefLinks, inner=true
             // recall that index0 is the first subevent of the coreferring pair, i.e. index 0 of [0, 4]
             var e1 = historySubevents[indexCorefLinks[k][0]];
 
+            var firstSetofPointsInDiagram = e1["dotted-beg"][0];
+
             // the left margin starting point is different for each event, determined by its own first y-coordinate
-            var leftMarginPts = { "x": 0,  "y": e1["dotted-beg"][0]["y"]-x1/40};
+
+            if (firstSetofPointsInDiagram["x"]>400) {
+            	var leftMarginPts = { "x": 0,  "y": e1["dotted-beg"][0]["y"]-125};
+            } else {
+            	var leftMarginPts = { "x": 0,  "y": e1["dotted-beg"][0]["y"]};
+            }
+            
             
             dashedLines1.push(leftMarginPts);
-            dashedLines2.push(e1["dotted-beg"][0]);
+            dashedLines2.push(firstSetofPointsInDiagram);
 
             if (sendToTop == false) {
                 var addLeftLines2Participants = collectPoints(dashedLines1, dashedLines2, false, false, indexParticipant);
@@ -972,13 +984,26 @@ function prepareLinks4Coreference (historySubevents, indexCorefLinks, inner=true
 
 function addSentence2Diagram(sentences) {
 
-    var svgTextBox = d3.select(".diagram").append("svg")
-                                    .attr("width", -200)
-                                    .attr("height", 450);
+	var tempX = 0;
 
-    var TextSelection = svgTextBox.append("text")
-        .text(sentences[0])
+    for (sent in sentences) {
 
+    	// staggering y-coordinate of text
+
+    	if (sent % 2 != 0) {
+	    	var tempY = -10;
+	    } else {
+	    	var tempY = -50;
+	    }
+
+	    var TextSelection = svgContainer.append("text")
+	    	.attr("class", "sentText")
+            .attr("x", tempX)
+            .attr("y", tempY)
+	        .text(sentences[sent]);
+
+	    tempX+=250;
+    }
 }
 
 
@@ -1141,7 +1166,7 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
 
         // inserting a point above for those subevents that occur later in order that the line intersect less
         if (allThePointsForParticipantInArray[1]["x"]>450) {
-            higherPt = {x: 250, y: 10};
+            higherPt = {x: 425, y: 5};
             allThePointsForParticipantInArray.splice(1, 0, higherPt);
         }
 
@@ -1213,7 +1238,6 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
 
     }
 
-    console.log(sentence);
 
     addSentence2Diagram(sentence);
 
