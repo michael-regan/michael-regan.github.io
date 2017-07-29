@@ -406,30 +406,25 @@ function addPathForceLabels(svgContainer, subEvent1, subEvent2, prevSubEvent) {
 
         var thisText = prevSubEvent[2];
 
-        console.log(thisText);
-
-        var addPthFrcText = svgContainer.append("text")
-                                .attr("x", x+5)
-                                .attr("y", y+5)
-                                .text(thisText);
-
     } else if (prevSubEvent[3] == 'PTH' || prevSubEvent[3] == 'FRC') {
 
         var thisText = prevSubEvent[3];
 
-        console.log(thisText);
+    } else if (prevSubEvent[4] == 'PTH' || prevSubEvent[4] == 'FRC') {
 
-        var addPthFrcText = svgContainer.append("text")
-                                .attr("x", x+5)
-                                .attr("y", y+5)
-                                .text(thisText);
+        var thisText = prevSubEvent[4];
+
     }
+
+    var addPthFrcText = svgContainer.append("text")
+                            .attr("x", x+5)
+                            .attr("y", y+5)
+                            .text(thisText);
 
 }
 
 // x1 is the x-translation factor
 function drawAxes (svgContainer, height, aspectHeight, includeXaxis, x1) {
-
 
     //hacky height is the upper part of the y-axis, while height adjusts the bottom part
     if (aspectHeight == 80) {
@@ -449,7 +444,6 @@ function drawAxes (svgContainer, height, aspectHeight, includeXaxis, x1) {
         
     }
 
-
     if (includeXaxis) {
 
         var xAxis = [   {"x": 0+x1, "y":height},
@@ -461,7 +455,6 @@ function drawAxes (svgContainer, height, aspectHeight, includeXaxis, x1) {
                 .attr("stroke-width", 1)
                 .attr("fill", "none");
     };
-
 
     var yAxis = [   {"x": 0+x1, "y":hackyHeight},
                     {"x": 0+x1, "y":height}];
@@ -482,11 +475,14 @@ function addText (svgContainer, myAspectObject, subeventArray) {
 
     var theme = subeventArray[2];
 
+    if (subeventArray[3] == 'MOT') {
+        theme += '/MOT';
+    }
+
     if (theme){
-        var themeLen = theme.length*1.5;
+        var themeLen = theme.length*2.2;
     }
     
-
     var c = myAspectObject["bcr-labels"]["c"];
 
     var r = myAspectObject["bcr-labels"]["r"];
@@ -534,7 +530,6 @@ function collectPoints(dottedLines1, dottedLines2, inner=true, sendToTop=false, 
     // indexParticipant adds the index (one of them to each array so that each line can be drawn all at one)
     // form of pathinfo then will be: array(dict, dict, int)
 
-
     pathinfo = [{x:dottedLines1[0]["x"], y:dottedLines1[0]["y"]},
                 {x:dottedLines2[0]["x"], y:dottedLines2[0]["y"]}];
 
@@ -549,7 +544,7 @@ function addPoints4Coreference (arr, colorIndex, participants) {
 
     // Creating path using data in pathinfo and path data generator d3line.
 
-    var colors = ['Red', 'DarkMagenta', 'DarkOrange', 'Green'];
+    var colors = ['Red', 'DarkMagenta', 'DarkOrange', 'Green', 'Pink'];
 
     var color = colors[colorIndex];
 
@@ -872,7 +867,6 @@ function draw (event) {
                 var subEvent2 = objects[allAspects[i]];
             }
 
-            
             var drawForceDynamicLines = drawFDlines(svgContainer, subEvent1, subEvent2);
 
             // checking for PTH and drawing arrows
@@ -900,7 +894,6 @@ function getAllIndexes(arr, val) {
     }
     return indexes;
 }
-
 
 
 function prepareLinks4Coreference (historySubevents, indexCorefLinks, inner=true, sendToTop=false) {
@@ -949,7 +942,6 @@ function prepareLinks4Coreference (historySubevents, indexCorefLinks, inner=true
             } else {
             	var leftMarginPts = { "x": 0,  "y": e1["dotted-beg"][0]["y"]};
             }
-            
             
             dashedLines1.push(leftMarginPts);
             dashedLines2.push(firstSetofPointsInDiagram);
@@ -1055,6 +1047,12 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
     for (k in tempUnique) {
         num = tempUnique[k];
         indexesNotCoref.push([num, num]);
+    }
+
+    // Adding points that do not corefer to those that do: All participants now have lines drawn
+
+    for (idx in indexesNotCoref) {
+        indexCorefLinks.push(indexesNotCoref[idx]);
     }
 
     //console.log(indexCorefLinks);
@@ -1164,9 +1162,11 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
             return a.x - b.x;
         });
 
+        console.log(allThePointsForParticipantInArray);
+
         // inserting a point above for those subevents that occur later in order that the line intersect less
         if (allThePointsForParticipantInArray[1]["x"]>450) {
-            higherPt = {x: 425, y: 5};
+            higherPt = {x: allThePointsForParticipantInArray[1]["x"]-25, y: 5};
             allThePointsForParticipantInArray.splice(1, 0, higherPt);
         }
 
@@ -1186,7 +1186,6 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
             lowerPt = {x: new_x, y: 225};
             allThePointsForParticipantInArray.splice(-1, 0, lowerPt);
         }
-
 
         // removing duplicates
         function dedup(arr) {
@@ -1237,7 +1236,6 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
         finalArraySortedPoints4Drawing.push(allThePointsForParticipantInArray);
 
     }
-
 
     addSentence2Diagram(sentence);
 
