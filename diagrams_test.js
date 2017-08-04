@@ -444,6 +444,7 @@ function addPathForceLabels(svgContainer, subEvent1, subEvent2, prevSubEvent) {
         var addPthFrcText = svgContainer.append("text")
                                 .attr("x", x+5)
                                 .attr("y", y+5)
+                                .style("fill", "red")
                                 .text(thisText);
 
     } else if (prevSubEvent[3] == 'PTH' || prevSubEvent[3] == 'FRC') {
@@ -453,6 +454,7 @@ function addPathForceLabels(svgContainer, subEvent1, subEvent2, prevSubEvent) {
         var addPthFrcText = svgContainer.append("text")
                                 .attr("x", x+5)
                                 .attr("y", y+5)
+                                .style("fill", "red")
                                 .text(thisText);
     }
 

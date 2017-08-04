@@ -4,7 +4,7 @@ var lineFunction = d3.line()
                           .y(function(d) { return d.y; });
 
 
-var theseEvents = [
+var theseEvents = [[
         
     ['and another guy picks up the rock [from the road],', 'get-13.5.1', 'Sbj V Obj DNI-1', 'Volitional Remove', 'directed achievement', 'Sbj V Obj DNI', "picks('guy', 'rock', 'road')", 'Theme-of(y,e) & Component-of(a,guy) & Component-of(b,rock) & Component-of(c,road) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & -MER(q2) & EXST(q3) & FRC(a,b) & PTH(b,c)'],
 
@@ -14,19 +14,19 @@ var theseEvents = [
 
     ['and he [the boy] takes off [from here]', 'escape-51.1', 'Sbj V DNI', 'Self-volitional Motion', 'directed achievement', 'Sbj V DNI', "takes off('he', 'here')", 'Theme-of(x,e) & Component-of(a,he) & Component-of(b,here) & DirAch(a,i,j,q1) & InhStPh(b,i,k,q2) & VOL(q1) & MOT(q1) & EXST(q2) & PTH(a,b)']
 
-];
+],
 
-var theseEvents2 = [
+[
 
-    ['Holmes turned to his desk', 'roll-51.3.1', 'Sbj V PathP', 'Self-volitional Motion', 'incremental accomplishment', 'Sbj V PathP', "turned('Holmes', 'desk')", 'Theme-of(x,e) & Component-of(a,Holmes) & Component-of(b,desk) & IncrAcc(a,i,j,q1) & InhStPh(b,i,k,q2) & VOL(q1) & MOT(q1) & EXIST(q2) & PTH(a,b)'],
+    ['Holmes turned to his desk', 'roll-51.3.1', 'Sbj V PathP', 'Self-volitional Motion', 'incremental accomplishment', 'Sbj V PathP', "turned('Holmes', 'desk')", 'Theme-of(x,e) & Component-of(a,Holmes) & Component-of(b,desk) & IncrAcc(a,i,j,q1) & InhStPh(b,i,k,q2) & VOL(q1) & MOT(q1) & EXST(q2) & PTH(a,b)'],
 
     ['and unlocking it', 'disassemble-23.3', 'Sbj V Obj', 'Volitional COS', 'directed achievement', 'Sbj V Obj', "unlocking('Holmes', 'desk')", 'Theme-of(y,e) & Component-of(a,Holmes) & Component-of(b,desk) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
 
-    ['drew out a small case-book', 'remove-10.1', 'Sbj V Obj', 'Volitional Remove', 'incremental accomplishment', 'Sbj V Obj', "drew out('Holmes', 'casebook', 'desk')", 'Theme-of(y,e) & Component-of(a,Holmes) & Component-of(b,casebook) & Component-of(c,desk) & UndAct(a,i,j,q1) & IncrAcc(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & -MER(q2) & EXIST(q3) & FRC(a,b) & PTH(b,c)'],
+    ['drew out a small case-book', 'remove-10.1', 'Sbj V Obj', 'Volitional Remove', 'incremental accomplishment', 'Sbj V Obj', "drew out('Holmes', 'casebook', 'desk')", 'Theme-of(y,e) & Component-of(a,Holmes) & Component-of(b,casebook) & Component-of(c,desk) & UndAct(a,i,j,q1) & IncrAcc(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & -MER(q2) & EXST(q3) & FRC(a,b) & PTH(b,c)'],
 
-    ['which he consulted', 'inquire-37.1.2', 'Sbj V Obj', 'Volitional Attend', 'undirected activity', 'Sbj V Obj', "consulted('Holmes', 'casebook')", 'Theme-of(x,e) & Component-of(a,Holmes) & Component-of(b,casebook) & UndAct(a,i,j,q1) & InhStPh(b,i,k,q2) & VOL(q1) & ATND(a,b)']
+    ['which he consulted', 'inquire-37.1.2', 'Sbj V Obj', 'Volitional Attend', 'undirected activity', 'Sbj V Obj', "consulted('Holmes', 'casebook')", 'Theme-of(x,e) & Component-of(a,Holmes) & Component-of(b,casebook) & UndAct(a,i,j,q1) & InhStPh(b,i,k,q2) & VOL(q1) & EXST(q2) & ATND(a,b)']
 
-];
+]];
 
 var svgHeight = 400;
 
@@ -42,7 +42,7 @@ var svgContainer = d3.select(".diagram").append("svg")
 var selected = [];
 
 for (var j=0; j<4; j++){
-	var event = theseEvents2[j];
+	var event = theseEvents[thisInt][j];
 	draw(event);
 	x1 += 225;
 };
@@ -415,15 +415,15 @@ function addPathForceLabels(svgContainer, subEvent1, subEvent2, prevSubEvent) {
     var x = subEvent1["fd2"]["when-first"]["x"];
     var y = (subEvent1["fd2"]["when-first"]["y"] + subEvent2["fd2"]["when-second"]["y"]) / 2;
 
-    if (prevSubEvent[2] == 'PTH' || prevSubEvent[2] == 'FRC') {
+    if (prevSubEvent[2] == 'PTH' || prevSubEvent[2] == 'FRC' || prevSubEvent[2] == 'ATND') {
 
         var thisText = prevSubEvent[2];
 
-    } else if (prevSubEvent[3] == 'PTH' || prevSubEvent[3] == 'FRC') {
+    } else if (prevSubEvent[3] == 'PTH' || prevSubEvent[3] == 'FRC' || prevSubEvent[3] == 'ATND') {
 
         var thisText = prevSubEvent[3];
 
-    } else if (prevSubEvent[4] == 'PTH' || prevSubEvent[4] == 'FRC') {
+    } else if (prevSubEvent[4] == 'PTH' || prevSubEvent[4] == 'FRC' || prevSubEvent[4] == 'ATND') {
 
         var thisText = prevSubEvent[4];
 
@@ -432,6 +432,7 @@ function addPathForceLabels(svgContainer, subEvent1, subEvent2, prevSubEvent) {
     var addPthFrcText = svgContainer.append("text")
                             .attr("x", x+5)
                             .attr("y", y+5)
+                            .style("fill", "red")
                             .text(thisText);
 
 }
@@ -625,7 +626,7 @@ function addPoints4Coreference (arr, colorIndex, participants) {
                 .duration(200)      
                 .style("opacity", .9);  
             tooldiv .html('<h1>'+currentParticipant+'</h1>')
-                .style("left", (80) + "px")     
+                .style("left", (100) + "px")     
                 .style("top", (d3.event.pageY - 28) + "px")
                 .style("background", color)
                 .style("opacity", 0.1);        
