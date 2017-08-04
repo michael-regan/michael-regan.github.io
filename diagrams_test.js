@@ -811,7 +811,7 @@ function draw () {
     // var syntax = events[currentEvent][5];
     // var predicate = events[currentEvent][6];
 
-    for (n=0; n<8; n++) {
+    for (n=0; n<11; n++) {
 
         var labels = ['Example: ', 'VerbNet class: ', 'VerbNet case frames: ', 'Force-dynamic annotation: ', 'Aspect annotation: ', 'Argument Structure Construction: ', 'Participant mapping: ', 'Predicate calculus representation: '];
 
