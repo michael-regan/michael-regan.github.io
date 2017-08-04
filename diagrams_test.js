@@ -817,9 +817,11 @@ function draw () {
 
         var labels = ['Example: ', 'VerbNet class: ', 'VerbNet case frames: ', 'Force-dynamic annotation: ', 'Aspect annotation: ', 'Argument Structure Construction: ', 'Participant mapping: ', 'Predicate calculus representation: '];
 
-        var addedHeader = addSecondDivText(labels[n], true);
-        var addedSentence = addSecondDivText(events[currentEvent][n], false);
-        var addedBlank = addSecondDivText('', false);
+        if (n != 1 && n != 2) {
+            var addedHeader = addSecondDivText(labels[n], true);
+            var addedSentence = addSecondDivText(events[currentEvent][n], false);
+            var addedBlank = addSecondDivText('', false);
+        }
     }
 
     generateDiagram.addEventListener('click', resetScreen);
