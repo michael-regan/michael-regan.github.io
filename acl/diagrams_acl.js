@@ -4,7 +4,7 @@ var lineFunction = d3.line()
                           .y(function(d) { return d.y; });
 
 
-var events = [
+var theseEvents = [
         
     ['and another guy picks up the rock [from the road],', 'get-13.5.1', 'Sbj V Obj DNI-1', 'Volitional Remove', 'directed achievement', 'Sbj V Obj DNI', "picks('guy', 'rock', 'road')", 'Theme-of(y,e) & Component-of(a,guy) & Component-of(b,rock) & Component-of(c,road) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & -MER(q2) & EXST(q3) & FRC(a,b) & PTH(b,c)'],
 
@@ -13,6 +13,18 @@ var events = [
     ['and he [the boy] gets all situated again,', 'become-109.1', 'Sbj V', 'Self-volitional Internal', 'incremental accomplishment', 'Sbj V', "gets('he')", 'Theme-of(x,e) & Component-of(a,he) & IncrAcc(a,i,j,q1) & VINT(q1) & INT(q1)'],
 
     ['and he [the boy] takes off [from here]', 'escape-51.1', 'Sbj V DNI', 'Self-volitional Motion', 'directed achievement', 'Sbj V DNI', "takes off('he', 'here')", 'Theme-of(x,e) & Component-of(a,he) & Component-of(b,here) & DirAch(a,i,j,q1) & InhStPh(b,i,k,q2) & VOL(q1) & MOT(q1) & EXST(q2) & PTH(a,b)']
+
+];
+
+var theseEvents2 = [
+
+    ['Holmes turned to his desk', 'roll-51.3.1', 'Sbj V PathP', 'Self-volitional Motion', 'incremental accomplishment', 'Sbj V PathP', "turned('Holmes', 'desk')", 'Theme-of(x,e) & Component-of(a,Holmes) & Component-of(b,desk) & IncrAcc(a,i,j,q1) & InhStPh(b,i,k,q2) & VOL(q1) & MOT(q1) & EXIST(q2) & PTH(a,b)'],
+
+    ['and unlocking it', 'disassemble-23.3', 'Sbj V Obj', 'Volitional COS', 'directed achievement', 'Sbj V Obj', "unlocking('Holmes', 'desk')", 'Theme-of(y,e) & Component-of(a,Holmes) & Component-of(b,desk) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
+
+    ['drew out a small case-book', 'remove-10.1', 'Sbj V Obj', 'Volitional Remove', 'incremental accomplishment', 'Sbj V Obj', "drew out('Holmes', 'casebook', 'desk')", 'Theme-of(y,e) & Component-of(a,Holmes) & Component-of(b,casebook) & Component-of(c,desk) & UndAct(a,i,j,q1) & IncrAcc(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & -MER(q2) & EXIST(q3) & FRC(a,b) & PTH(b,c)'],
+
+    ['which he consulted', 'inquire-37.1.2', 'Sbj V Obj', 'Volitional Attend', 'undirected activity', 'Sbj V Obj', "consulted('Holmes', 'casebook')", 'Theme-of(x,e) & Component-of(a,Holmes) & Component-of(b,casebook) & UndAct(a,i,j,q1) & InhStPh(b,i,k,q2) & VOL(q1) & ATND(a,b)']
 
 ];
 
@@ -30,7 +42,7 @@ var svgContainer = d3.select(".diagram").append("svg")
 var selected = [];
 
 for (var j=0; j<4; j++){
-	var event = events[j];
+	var event = theseEvents2[j];
 	draw(event);
 	x1 += 225;
 };
@@ -38,6 +50,7 @@ for (var j=0; j<4; j++){
 // this might be a good spot for drawing the coreferential links
 
 var points4coreference = [];
+
 
 var drawCoref = drawCoreferenceLinks(historySubevents, allParticipantsList);
 
@@ -105,11 +118,11 @@ function getObjects (height, x1) {
                                                 {"x":20+x1, "y":height-10},
                                                 {"x":20+x1, "y":height-20} ], 
 
-                                "dotted-end": [ {"x":100+x1, "y":height-20},
+                                "dotted-end": [ {"x":100+x1, "y":height-30},
                                                 {"x":100+x1, "y":height-10},
                                                 {"x":120+x1, "y":height-10} ],
 
-                                "bcr-labels" : {"b" : [{"x":0+x1, "y":height-10}, {"x":-5+x1, "y":height-10}], 
+                                "bcr-labels" : {"b" : [{"x":0+x1, "y":height-20}, {"x":-5+x1, "y":height-20}], 
                                                 "c" : [{"x":-1+x1, "y":height-20}, {"x":-1+x1, "y": height-60}],
                                                 "r" : ["None"]},
 
@@ -440,7 +453,7 @@ function drawAxes (svgContainer, height, aspectHeight, includeXaxis, x1) {
     } else if (aspectHeight == 60) {
 
         var hackyHeight = height-aspectHeight-20;
-        height = height-10;
+        height = height-30;
         
     }
 
@@ -527,8 +540,8 @@ function addText (svgContainer, myAspectObject, subeventArray) {
 function collectPoints(dottedLines1, dottedLines2, inner=true, sendToTop=false, indexParticipant) {
 
     // collecting the points for each coreferential line, putting them into an array
-    // indexParticipant adds the index (one of them to each array so that each line can be drawn all at one)
-    // form of pathinfo then will be: array(dict, dict, int)
+    // indexParticipant adds the index (one of them to each array so that each line can be drawn all at once)
+    // form pathinfo is: array(dict, dict, int)
 
     pathinfo = [{x:dottedLines1[0]["x"], y:dottedLines1[0]["y"]},
                 {x:dottedLines2[0]["x"], y:dottedLines2[0]["y"]}];
@@ -575,7 +588,7 @@ function addPoints4Coreference (arr, colorIndex, participants) {
 
     // Define the div for the tooltip
     var tooldiv = d3.select("body").append("tooldiv")   
-        .attr("class", "tooltip")               
+        .attr("class", "tooltip")             
         .style("opacity", 0);
 
     // Determine points for tooltip (all coordinates where x=0)
@@ -598,6 +611,8 @@ function addPoints4Coreference (arr, colorIndex, participants) {
         }
     }
 
+    var lengthCurrentParticipant = currentParticipant.length;
+
 
     svgContainer.selectAll("dot")    
         .data(points4Text)         
@@ -610,7 +625,7 @@ function addPoints4Coreference (arr, colorIndex, participants) {
                 .duration(200)      
                 .style("opacity", .9);  
             tooldiv .html('<h1>'+currentParticipant+'</h1>')
-                .style("left", (100) + "px")     
+                .style("left", (80) + "px")     
                 .style("top", (d3.event.pageY - 28) + "px")
                 .style("background", color)
                 .style("opacity", 0.1);        
@@ -898,26 +913,33 @@ function getAllIndexes(arr, val) {
 
 function prepareLinks4Coreference (historySubevents, indexCorefLinks, inner=true, sendToTop=false) {
 
-
     if (inner == true) {
 
         for (j in indexCorefLinks) {
 
-            var dashedLines1 = [];
-            var dashedLines2 = [];
+            var k = 0;
 
-            // this will help the participant lines to be drawn all at once
-            var indexParticipant = indexCorefLinks[j][0];
+            while (k < indexCorefLinks[j].length-1) {
 
-            var e1 = historySubevents[indexCorefLinks[j][0]];
-            var e2 = historySubevents[indexCorefLinks[j][1]];
-            
-            dashedLines1.push(e1["dotted-end"].slice(-1)[0]);
+                var dashedLines1 = [];
+                var dashedLines2 = [];
 
-            // notice here that slice is not used-->the first set of coordinates of dotted-beg is used
-            dashedLines2.push(e2["dotted-beg"][0]);
+                // this will help the participant lines to be drawn all at once
+                var indexParticipant = indexCorefLinks[j][0];
 
-            var addLinesBetweenParticipants = collectPoints(dashedLines1, dashedLines2, true, false, indexParticipant);
+                var e1 = historySubevents[indexCorefLinks[j][k]];
+                var e2 = historySubevents[indexCorefLinks[j][k+1]];
+
+                dashedLines1.push(e1["dotted-end"].slice(-1)[0]);
+
+                // notice here that slice is not used-->the first set of coordinates of dotted-beg is used
+                dashedLines2.push(e2["dotted-beg"][0]);
+
+                var addLinesBetweenParticipants = collectPoints(dashedLines1, dashedLines2, true, false, indexParticipant);
+
+                k += 1;
+
+            }
 
         }
     } else {
@@ -938,7 +960,7 @@ function prepareLinks4Coreference (historySubevents, indexCorefLinks, inner=true
             // the left margin starting point is different for each event, determined by its own first y-coordinate
 
             if (firstSetofPointsInDiagram["x"]>400) {
-            	var leftMarginPts = { "x": 0,  "y": e1["dotted-beg"][0]["y"]-125};
+            	var leftMarginPts = { "x": 0,  "y": e1["dotted-beg"][0]["y"]-600*k/Math.exp(0.9*k)};
             } else {
             	var leftMarginPts = { "x": 0,  "y": e1["dotted-beg"][0]["y"]};
             }
@@ -982,6 +1004,8 @@ function addSentence2Diagram(sentences) {
 
     	// staggering y-coordinate of text
 
+        var lenSentence = sentences[sent].length;
+
     	if (sent % 2 != 0) {
 	    	var tempY = -10;
 	    } else {
@@ -990,7 +1014,7 @@ function addSentence2Diagram(sentences) {
 
 	    var TextSelection = svgContainer.append("text")
 	    	.attr("class", "sentText")
-            .attr("x", tempX)
+            .attr("x", tempX+Math.log(lenSentence*10000000000))
             .attr("y", tempY)
 	        .text(sentences[sent]);
 
@@ -1020,6 +1044,7 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
     for (i in allParticipantsList) {
 
         var indexes = getAllIndexes(allParticipantsList, allParticipantsList[i]);
+
 
         // JSON.stringify is needed to check if an array exists within an array to eliminate duplicates
         if (indexes.length > 1 && JSON.stringify(indexCorefLinks).indexOf(JSON.stringify(indexes))==-1) {
@@ -1055,10 +1080,10 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
         indexCorefLinks.push(indexesNotCoref[idx]);
     }
 
-    //console.log(indexCorefLinks);
 
     var addCoreferOuterLinks = prepareLinks4Coreference(historySubevents, indexCorefLinks, false, false);
     var addInnerLinks = prepareLinks4Coreference(historySubevents, indexCorefLinks, true, false);
+
     
     // at this point, points4coreference is of form array(dict, dict, int); I want to group these and send them to be drawn one by one
 
@@ -1077,6 +1102,7 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
 
             alreadyGrouped.push(i1);
 
+
             firstListPoints = points4coreference[i1].slice(0,-1);
             thisPartIndex = points4coreference[i1].slice(-1)[0];
 
@@ -1088,10 +1114,11 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
                     nextListPoints = points4coreference[i2].slice(0,-1);
                     innerLoopPartIndex = points4coreference[i2].slice(-1)[0];
 
-                    if (thisPartIndex===innerLoopPartIndex) {
+
+                    if (thisPartIndex==innerLoopPartIndex) {
 
                         alreadyGrouped.push(i2);
-                        participantGroupedPoints.push(nextListPoints);
+                        participantGroupedPoints.push(nextListPoints); 
 
                     }
 
@@ -1101,6 +1128,7 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
 
         }
 
+
         if (participantGroupedPoints.length>0) {
             groupedByIndexPoints.push(participantGroupedPoints);
             participantGroupedPoints = [];  
@@ -1108,8 +1136,10 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
 
     }
 
+
     var finalArraySortedPoints4Drawing = [];
     var sentence = [];
+
 
     for (obj in groupedByIndexPoints) {
 
@@ -1162,10 +1192,9 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
             return a.x - b.x;
         });
 
-        console.log(allThePointsForParticipantInArray);
 
         // inserting a point above for those subevents that occur later in order that the line intersect less
-        if (allThePointsForParticipantInArray[1]["x"]>450) {
+        if (allThePointsForParticipantInArray[1]["x"]>400) {
             higherPt = {x: allThePointsForParticipantInArray[1]["x"]-25, y: 5};
             allThePointsForParticipantInArray.splice(1, 0, higherPt);
         }
@@ -1183,6 +1212,16 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
             allThePointsForParticipantInArray.splice(-1, 0, higherPt);
         } else if (last_element["x"]-second_to_last["x"]>400 && last_element["y"]>100 && last_element["y"]<200) {
             new_x = (last_element["x"]+second_to_last["x"])/1.8;
+            lowerPt = {x: new_x, y: 225};
+            allThePointsForParticipantInArray.splice(-1, 0, lowerPt);
+        } else if (last_element["x"]-second_to_last["x"]>200 && last_element["y"]<100) {
+            // this is for points that occur in the first three events, but not the last
+            new_x = (last_element["x"]+second_to_last["x"])/2.0;
+            higherPt = {x: new_x, y: 10};
+            allThePointsForParticipantInArray.splice(-1, 0, higherPt);
+        } else if (last_element["x"]-second_to_last["x"]>200 && last_element["y"]>100 && last_element["y"]<100) {
+            // this statement will never evaluate to true; see last part of conjunction above
+            new_x = (last_element["x"]+second_to_last["x"])/2.0;
             lowerPt = {x: new_x, y: 225};
             allThePointsForParticipantInArray.splice(-1, 0, lowerPt);
         }
@@ -1203,7 +1242,7 @@ function drawCoreferenceLinks (historySubevents, allParticipantsList) {
         allThePointsForParticipantInArray = dedup(allThePointsForParticipantInArray);
 
 
-        // for objects with same x-coordinating, ensuring that y-coordinate is sorted properly also
+        // for objects with same x-coordinates, ensuring that y-coordinate is sorted properly also
 
         for (mm in allThePointsForParticipantInArray) {
 

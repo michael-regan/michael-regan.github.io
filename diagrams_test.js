@@ -65,7 +65,9 @@ var events = [
 
     ['The hammer hit the window to pieces', 'hit-18.1', 'NP V NP ADJP PP.result', 'Physical COS', 'directed achievement', 'Sbj V Obj ResultP', "hit('hammer', 'window')", 'Theme-of(y,e) & Component-of(a,hammer) & Component-of(b,window) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & CNTC(q1) & COS(q2) & FRC(a,b)'],
 
-    ['The Romans destroyed the city', 'destroy-44', 'NP V NP', 'Volitional COS', 'directed achievement', 'Sbj V Obj', "destroyed('Romans', 'city')", 'Theme-of(y,e) & Component-of(a,Romans) & Component-of(b,city) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)']
+    ['The Romans destroyed the city', 'destroy-44', 'NP V NP', 'Volitional COS', 'directed achievement', 'Sbj V Obj', "destroyed('Romans', 'city')", 'Theme-of(y,e) & Component-of(a,Romans) & Component-of(b,city) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
+
+    ['The protesters burned the flag', 'other_cos-45.4', 'Sbj V Obj', 'Volitional COS', 'incremental accomplishment', 'Sbj V Obj', "burned('protesters', 'flag')", 'Theme-of(y,e) & Component-of(a,protesters) & Component-of(b,flag) & UndAct(a,i,j,q1) & IncrAcc(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)']
 
 ];
 
