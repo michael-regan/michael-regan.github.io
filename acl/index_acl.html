@@ -21,17 +21,19 @@
 		<h1>Force dynamics in narratives</h1>
 	</div>
 
-    
-	<div class="main">
-		<div class="diagram">
-        <button class="button" onclick="goBack()">Back</button>
-		</div>
-	</div>
+    <div class="main">
+        <div class="diagram">
+        <button class="button" onclick="goBack();">Back</button>
+    </div>
+
+<!--     <div class="reset">
+        <button class="button" onclick="d3.select('svg').remove();">Reset</button>
+    </div> -->
 
 
 <script> 
 
-var x1 = 100; var currentEvent = 0;
+var x1 = 100; var currentEvent = 0; var thisInt=1;
 
 function goBack() {
     window.history.back();
