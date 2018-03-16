@@ -44,43 +44,43 @@ function addSecondDivText (myText, bold=true) {
 
 var events = [
 
-    ['The hygienist flossed my teeth', 'floss-41.2.1', 'Sbj V Obj', 'Volitional COS', 'IncrementalAccomplishment', 'Sbj V Obj', "flossed('hygienist', 'teeth')", 'Theme-of(y,e) & Component-of(a,hygienist) & Component-of(b,teeth) & UndAct(a,i,j,q1) & IncrAcc(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
+    ['The hygienist flossed my teeth', 'floss-41.2.1', 'Sbj V Obj', 'Volitional COS', 'Incremental Accomplishment', 'Sbj V Obj', "flossed('hygienist', 'teeth')", 'Theme-of(y,e) & Component-of(a,hygienist) & Component-of(b,teeth) & UndAct(a,i,j,q1) & IncrAcc(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
 
-    ['I flossed', 'floss-41.2.1', 'Sbj V', 'Volitional COS', 'UndirectedActivity', 'Sbj V', "flossed('I', 'NI')", 'Theme-of(y,e) & Component-of(a,I) & Component-of(b,NI) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
+    ['I flossed', 'floss-41.2.1', 'Sbj V', 'Volitional COS', 'Undirected Activity', 'Sbj V', "flossed('I', 'NI')", 'Theme-of(y,e) & Component-of(a,I) & Component-of(b,NI) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
 
-    ['She flossed her teeth with floss', 'floss-41.2.1', 'Sbj V Obj with Obl', 'Instrument COS', 'IncrementalAccomplishment', 'Sbj V Obj with Obl', "floss('She', 'floss', 'teeth')", 'Theme-of(z,e) & Component-of(a,She) & Component-of(b,floss) & Component-of(c,teeth) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & VOL(q1) & COS(q3) & FRC(a,b) & FRC(b,c)'],
+    ['She flossed her teeth with floss', 'floss-41.2.1', 'Sbj V Obj with Obl', 'Instrument COS', 'Incremental Accomplishment', 'Sbj V Obj with Obl', "floss('She', 'floss', 'teeth')", 'Theme-of(z,e) & Component-of(a,She) & Component-of(b,floss) & Component-of(c,teeth) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & VOL(q1) & COS(q3) & FRC(a,b) & FRC(b,c)'],
 
-    ['She brushed with a toothbrush', 'floss-41.2.1', 'Sbj V with Obl', 'Instrument COS', 'UndirectedActivity', 'Sbj V with Obl', "brushed('She', 'toothbrush', 'NI')", 'Theme-of(z,e) & Component-of(a,She) & Component-of(b,toothbrush) & Component-of(c,NI) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & UndAct(c,i,l,q3) & VOL(q1) & COS(q3) & FRC(a,b) & FRC(b,c)'], 
+    ['She brushed with a toothbrush', 'floss-41.2.1', 'Sbj V with Obl', 'Instrument COS', 'Undirected Activity', 'Sbj V with Obl', "brushed('She', 'toothbrush', 'NI')", 'Theme-of(z,e) & Component-of(a,She) & Component-of(b,toothbrush) & Component-of(c,NI) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & UndAct(c,i,l,q3) & VOL(q1) & COS(q3) & FRC(a,b) & FRC(b,c)'], 
 
-    ['Lydia pocketed the change', 'pocket-9.10', 'Sbj V Obj', 'Volitional Apply', 'DirectedAchievement', 'Sbj V Obj', "pocketed('Lydia', 'change', 'NI')", 'Theme-of(y,e) & Component-of(a,Lydia) & Component-of(b,change) & Component-of(c,NI) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & +MER(q2) & EXIST(q3) & FRC(a,b) & PTH(b,c)'],
+    ['Lydia pocketed the change', 'pocket-9.10', 'Sbj V Obj', 'Volitional Apply', 'Directed Achievement', 'Sbj V Obj', "pocketed('Lydia', 'change', 'NI')", 'Theme-of(y,e) & Component-of(a,Lydia) & Component-of(b,change) & Component-of(c,NI) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & +MER(q2) & EXIST(q3) & FRC(a,b) & PTH(b,c)'],
 
-    ['Cynthia nibbled', 'chew-39.2-1', 'Sbj V', 'Volitional COS', 'UndirectedActivity', 'Sbj V', "nibbled('Cynthia', 'NI')", 'Theme-of(y,e) & Component-of(a,Cynthia) & Component-of(b,NI) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
+    ['Cynthia nibbled', 'chew-39.2-1', 'Sbj V', 'Volitional COS', 'Undirected Activity', 'Sbj V', "nibbled('Cynthia', 'NI')", 'Theme-of(y,e) & Component-of(a,Cynthia) & Component-of(b,NI) & UndAct(a,i,j,q1) & UndAct(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
 
     ['Susan cut the recipes from the magazine with a sharp knife', 'cut-21.1', 'NP V NP PP.source PP.instrument', 'Instrument Remove', 'incremental accomplishment', 'Sbj V Obj PathP with Obl', "cut('Susan', 'knife', 'recipes', 'magazine')", 'Theme-of(z,e) & Component-of(a,Susan) & Component-of(b,knife) & Component-of(c,recipes) & Component-of(d,magazine) & UndEnd(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & InhStPh(d,i,m,q4) & VOL(q1) & CNTC(q2) & -MER(q3) & EXST(q4) & FRC(a,b) & FRC(b,c) & PTH(c,d)'],
 
-    ['Doug cleaned the table of dishes', 'clear-10.3', 'NP V NP.location PP.theme', 'Volitional Uncover', 'incremental accomplishment', 'Sbj V Obj of Obl', "cleaned('Doug', 'dishes', 'table')", 'Theme-of(z,e) & Component-of(a,Doug) & Component-of(b,dishes) & Component-of(c,table) & UndEnd(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & VOL(q1) & REM(q2) & -MER(q3) & FRC(a,b) & PTH(b,c)'],
+    ['Doug cleaned the table of dishes', 'clear-10.3', 'NP V NP.location PP.theme', 'Volitional Uncover', 'Incremental Accomplishment', 'Sbj V Obj of Obl', "cleaned('Doug', 'dishes', 'table')", 'Theme-of(z,e) & Component-of(a,Doug) & Component-of(b,dishes) & Component-of(c,table) & UndEnd(a,i,j,q1) & UndAct(b,i,k,q2) & IncrAcc(c,i,l,q3) & VOL(q1) & REM(q2) & -MER(q3) & FRC(a,b) & PTH(b,c)'],
 
-    ['The books slid from the table to the floor', 'slide-11.2', 'NP V PP.initial_location PP.destination', 'Autonomous Motion', 'incremental accomplishment', 'Sbj V PathP', "slid('books', 'floor')", 'Theme-of(x,e) & Component-of(a,books) & Component-of(b,floor) & IncrAcc(a,i,j,q1) & InhStPh(b,i,k,q2) & MOT(q1) & EXST(q2) & PTH(a,b)'],
+    ['The books slid from the table to the floor', 'slide-11.2', 'NP V PP.initial_location PP.destination', 'Autonomous Motion', 'Incremental Accomplishment', 'Sbj V PathP', "slid('books', 'floor')", 'Theme-of(x,e) & Component-of(a,books) & Component-of(b,floor) & IncrAcc(a,i,j,q1) & InhStPh(b,i,k,q2) & MOT(q1) & EXST(q2) & PTH(a,b)'],
 
-    ['David constructed a house out of sticks', 'create-26.4', 'NP V NP PP.material', 'Volitional Form', 'nonincremental accomplishment', 'Sbj V Obj from/out of Obl', "constructed('David', 'sticks', 'house')", 'Theme-of(z,e) & Component-of(a,David) & Component-of(b,sticks) & Component-of(c,house) & UndEnd(a,i,j,q1) & UndAct(b,i,k,q2) & NonIncrAcc(c,i,l,q3) & VOL(q1) & FORM(q2) & DES(q3) & FRC(a,b) & FORM(b,c)'],
+    ['David constructed a house out of sticks', 'create-26.4', 'NP V NP PP.material', 'Volitional Form', 'Nonincremental Accomplishment', 'Sbj V Obj from/out of Obl', "constructed('David', 'sticks', 'house')", 'Theme-of(z,e) & Component-of(a,David) & Component-of(b,sticks) & Component-of(c,house) & UndEnd(a,i,j,q1) & UndAct(b,i,k,q2) & NonIncrAcc(c,i,l,q3) & VOL(q1) & FORM(q2) & DES(q3) & FRC(a,b) & FORM(b,c)'],
 
-    ['Paula hit the ball with a stick', 'hit-18.1', 'NP V NP PP.instrument', 'Instrument Force', 'cyclic achievement', 'Sbj V Obj with Obl', "hit('Paula', 'stick', 'ball')", 'Theme-of(z,e) & Component-of(a,Paula) & Component-of(b,stick) & Component-of(c,ball) & CycAch(a,i,j,q1) & CycAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & CNTC(q2) & EXST(q3) & FRC(a,b) & FRC(b,c)'],
+    ['Paula hit the ball with a stick', 'hit-18.1', 'NP V NP PP.instrument', 'Instrument Force', 'Cyclic Achievement', 'Sbj V Obj with Obl', "hit('Paula', 'stick', 'ball')", 'Theme-of(z,e) & Component-of(a,Paula) & Component-of(b,stick) & Component-of(c,ball) & CycAch(a,i,j,q1) & CycAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & CNTC(q2) & EXST(q3) & FRC(a,b) & FRC(b,c)'],
 
-    ['Bill rolled the drawer open', 'roll-51.3.1', 'NP V NP ADJ', 'Volitional COS', 'directed achievement', 'Sbj V Obj ResultP', "rolled('Bill', 'drawer')", 'Theme-of(y,e) & Component-of(a,Bill) & Component-of(b,drawer) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
+    ['Bill rolled the drawer open', 'roll-51.3.1', 'NP V NP ADJ', 'Volitional COS', 'Directed Achievement', 'Sbj V Obj ResultP', "rolled('Bill', 'drawer')", 'Theme-of(y,e) & Component-of(a,Bill) & Component-of(b,drawer) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
 
-    ['I lifted the books onto the table', 'put_direction-9.4', 'NP V NP PP.destination', 'Volitional Apply', 'directed achievement', 'Sbj V Obj PathP', "lifted('I', 'books', 'table')", 'Theme-of(y,e) & Component-of(a,I) & Component-of(b,books) & Component-of(c,table) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & +MER(q2) & EXST(q3) & FRC(a,b) & PTH(b,c)'],
+    ['I lifted the books onto the table', 'put_direction-9.4', 'NP V NP PP.destination', 'Volitional Apply', 'Directed Achievement', 'Sbj V Obj PathP', "lifted('I', 'books', 'table')", 'Theme-of(y,e) & Component-of(a,I) & Component-of(b,books) & Component-of(c,table) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & InhStPh(c,i,l,q3) & VOL(q1) & +MER(q2) & EXST(q3) & FRC(a,b) & PTH(b,c)'],
 
-    ['My computer connected to his computer', 'mix-22.1-2-1', 'NP V PP.patient', 'Autonomous Apply', 'directed achievement', 'Sbj V PathP', "connected('computer', 'computer')", 'Theme-of(x,e) & Component-of(a,computer) & Component-of(b,computer) & DirAch(a,i,j,q1) & InhStPh(b,i,k,q2) & +MER(q1) & EXST(q2) & PTH(a,b)'],
+    ['My computer connected to his computer', 'mix-22.1-2-1', 'NP V PP.patient', 'Autonomous Apply', 'Directed Achievement', 'Sbj V PathP', "connected('computer', 'computer')", 'Theme-of(x,e) & Component-of(a,computer) & Component-of(b,computer) & DirAch(a,i,j,q1) & InhStPh(b,i,k,q2) & +MER(q1) & EXST(q2) & PTH(a,b)'],
 
-    ['The sky cleared', 'clear-10.3-1', 'NP.location V', 'Autonomous COS', 'directed achievement', 'Sbj V', "cleared('sky',)", 'Theme-of(x,e) & Component-of(a,sky) & DirAch(a,i,j,q1) & COS(q1)'],
+    ['The sky cleared', 'clear-10.3-1', 'NP.location V', 'Autonomous COS', 'Directed Achievement', 'Sbj V', "cleared('sky',)", 'Theme-of(x,e) & Component-of(a,sky) & DirAch(a,i,j,q1) & COS(q1)'],
 
-    ['The cat clawed the couch to pieces with her sharp nails', 'swat-18.2', 'NP V NP PP.result PP.instrument', 'Instrument COS', 'nonincremental accomplishment', 'Sbj V Obj ResultP with Obl', "clawed('cat', 'nails', 'couch')", 'Theme-of(z,e) & Component-of(a,cat) & Component-of(b,nails) & Component-of(c,couch) & UndEnd(a,i,j,q1) & UndAct(b,i,k,q2) & NonIncrAcc(c,i,l,q3) & VOL(q1) & CNTC(q2) & COS(q3) & FRC(a,b) & FRC(b,c)'],
+    ['The cat clawed the couch to pieces with her sharp nails', 'swat-18.2', 'NP V NP PP.result PP.instrument', 'Instrument COS', 'Nonincremental Accomplishment', 'Sbj V Obj ResultP with Obl', "clawed('cat', 'nails', 'couch')", 'Theme-of(z,e) & Component-of(a,cat) & Component-of(b,nails) & Component-of(c,couch) & UndEnd(a,i,j,q1) & UndAct(b,i,k,q2) & NonIncrAcc(c,i,l,q3) & VOL(q1) & CNTC(q2) & COS(q3) & FRC(a,b) & FRC(b,c)'],
 
-    ['The hammer hit the window to pieces', 'hit-18.1', 'NP V NP ADJP PP.result', 'Physical COS', 'directed achievement', 'Sbj V Obj ResultP', "hit('hammer', 'window')", 'Theme-of(y,e) & Component-of(a,hammer) & Component-of(b,window) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & CNTC(q1) & COS(q2) & FRC(a,b)'],
+    ['The hammer hit the window to pieces', 'hit-18.1', 'NP V NP ADJP PP.result', 'Physical COS', 'Directed Achievement', 'Sbj V Obj ResultP', "hit('hammer', 'window')", 'Theme-of(y,e) & Component-of(a,hammer) & Component-of(b,window) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & CNTC(q1) & COS(q2) & FRC(a,b)'],
 
-    ['The Romans destroyed the city', 'destroy-44', 'NP V NP', 'Volitional COS', 'directed achievement', 'Sbj V Obj', "destroyed('Romans', 'city')", 'Theme-of(y,e) & Component-of(a,Romans) & Component-of(b,city) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
+    ['The Romans destroyed the city', 'destroy-44', 'NP V NP', 'Volitional COS', 'Directed Achievement', 'Sbj V Obj', "destroyed('Romans', 'city')", 'Theme-of(y,e) & Component-of(a,Romans) & Component-of(b,city) & CycAch(a,i,j,q1) & DirAch(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)'],
 
-    ['The protesters burned the flag', 'other_cos-45.4', 'Sbj V Obj', 'Volitional COS', 'incremental accomplishment', 'Sbj V Obj', "burned('protesters', 'flag')", 'Theme-of(y,e) & Component-of(a,protesters) & Component-of(b,flag) & UndAct(a,i,j,q1) & IncrAcc(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)']
+    ['The protesters burned the flag', 'other_cos-45.4', 'Sbj V Obj', 'Volitional COS', 'Incremental Accomplishment', 'Sbj V Obj', "burned('protesters', 'flag')", 'Theme-of(y,e) & Component-of(a,protesters) & Component-of(b,flag) & UndAct(a,i,j,q1) & IncrAcc(b,i,k,q2) & VOL(q1) & COS(q2) & FRC(a,b)']
 
 ];
 
@@ -854,7 +854,7 @@ function draw () {
 
     for (n=0; n<8; n++) {
 
-        var labels = ['Example: ', 'VerbNet class: ', 'VerbNet case frames: ', 'Force-dynamic annotation: ', 'Aspect annotation: ', 'Argument Structure Construction: ', 'Participant mapping: ', 'Predicate calculus representation: '];
+        var labels = ['Example: ', 'VerbNet class: ', 'VerbNet case frames: ', 'Force-dynamic image schema: ', 'Aspect: ', 'Argument Structure Construction syntax: ', 'Participant mapping: ', 'Predicate calculus representation: '];
 
         if (n != 1 && n != 2) {
             var addedHeader = addSecondDivText(labels[n], true);
