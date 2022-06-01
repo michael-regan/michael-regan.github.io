@@ -1,56 +1,165 @@
-<!DOCTYPE html>
-<html lang='en'>
+<!DOCTYPE HTML>
 
-<head>
-    <meta charset='UTF-8'>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Force dynamics</title>
+<html>
+	<head>
+		
+		<title>homepage-regan</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link href="https://fonts.googleapis.com/css?family=EB+Garamond|Livvic&display=swap" rel="stylesheet">
 
-    <script src='https://d3js.org/d3.v4.min.js'></script>
-    <script src="https://d3js.org/d3-path.v1.min.js"></script>
-    <script src="https://d3js.org/d3-shape.v1.min.js"></script>
+		<!-- CSS only -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">   
+		<link rel="stylesheet" href="assets/css/main.css">
 
-    <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />    
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			  crossorigin="anonymous"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
-
-
-</head>
-
-
-<body>
-
-        <div class="page-header">
-          <a class="navbar-brand" href="#">
-            <img alt="Brand" src="logo.png">
-          </a>
-          <h1>Event decomposition</h1>
-        </div>
-
-        <ul class="nav nav-pills">
-          <li role="presentation"><a href="#">Home</a></li>
-          <li role="presentation"><a href="#">Details</a></li>
-          <li role="presentation"><a href="#">VerbNet</a></li>
-          <li role="presentation"><a href="./acl/index_acl.html">ACL Narratives</a></li>
-        </ul>
-
-        <div class="form"><input type="button" value="Generate diagram" class="btn btn-default"></div>
-
-        <div class="container">
-            <div class="svg-diagram" ></div>
-
-            <div class="annotation flex-item">
-                <p><br></p>
-                <div class="textbox" id="textbox"></div>
-            </div>
-        </div>
-
-        
-    <script type="text/javascript" src="diagrams_test.js"></script>
+		<!-- JavaScript Bundle with Popper -->
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
 
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-2JMH413518"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
 
-</body>
-</html>
+		  gtag('config', 'G-2JMH413518');
+		</script>
+
+
+	</head>
+	<body class="is-preload" data-spy="scroll" data-target="#myScrollspy" data-offset="20">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo" style="font-family: 'Livvic'">Michael Regan</h1>
+
+					<nav class="col-sm-4 navbar-expand-md" id="myScrollspy">
+
+						<div id="navbarScroll">
+							<ul>
+								<li><a href="#">Home</a></li>
+								<li><a href="#self">About self</a></li>
+								<li><a href="#talks">Invited talks</a></li>
+								<li><a href="#publications">Publications</a></li>
+								<li><a href="#service">Service</a></li>
+							</ul>
+						</div>
+					</nav>
+
+					<!-- <p><a class="icon solid alt"><span class="label">Contact --  [phone][at][home][dot][edu]</span></li></p> -->
+				</header>
+
+			<!-- Main -->
+				<div id="main" class="wrapper style1" style="">
+					<div class="container" id="navbarScroll">
+						<div class="major">
+
+							<h2 id="self">About self</h2>
+							<ul style="list-style-type:none; font-family: 'EB Garamond'">
+								<li>Postdoctoral Researcher, University of Washington, Paul G. Allen School of Computer Science & Engineering</li>
+								<li style="margin-left: 30px">Causal schemas; Datasets for multimodal causal reasoning </li>
+
+								<li>Senior professional research assistant, Institute of Cognitive Science, University of Colorado Boulder </li>
+								<li style="margin-left: 30px">AI assistant for education; Research in event structure and meaning representations; Data engineering</li>
+
+								<li>PhD Linguistics, University of New Mexico</li>
+								<li style="margin-left: 30px">Dissertation: Causal structure prediction for causal reasoning </li>
+								<li>MSc Computer Science, University of New Mexico </li>
+								<li style="margin-left: 30px">Machine Learning, Data Science </li>
+								<li>Internships with Amazon Alexa (Seattle, Boston) </li>
+								<li style="margin-left: 30px">Research in dialogue understanding, entity resolution, ontology learning</li>
+							</ul>
+
+							<h2 id="talks">Invited talks</h2>
+							<ul style="list-style-type:none; font-family: 'EB Garamond'">
+								<li id="talks">Nov 2019: UIUC Blender Lab NLP Seminar</li>
+								<li id="talks">Nov 2019: CU Boulder CompSem</li>
+								<li id="talks">Oct 2019: Amazon (Boston) Tech Talk</li>
+								<li id="talks">Oct 2019: Brandeis Computational Linguistics</li>
+							</ul>
+
+							<h2 id="publications">Publications</h2>
+
+                            <ul style="list-style-type:none; font-family: 'EB Garamond'">
+                            	<li id="pub">[Xinya Du, Zixuan Zhang, Sha Li, Ziqi Wang, Pengfei Yu, Hongwei Wang, Tuan Manh Lai, Xudong Lin, Iris Liu, Ben Zhou, Haoyang Wen, Manling Li, Darryl Hannan, Jie Lei, Hyounghun Kim, Rotem Dror, Haoyu Wang, Michael Regan, Qi Zeng, Qing Lyu, Charles Yu, Carl Edwards, Xiaomeng Jin, Yizhu Jiao, Ghazaleh Kazeminejad, Zhenhailong Wang, Chris Callison-Burch, Carl Vondrick, Mohit Bansal, Dan Roth, Jiawei Han, Shih-Fu Chang, Martha Palmer, Heng Ji]<br><a href="">RESIN-11: Schema-guided Event Prediction for 11 Newsworthy Scenarios</a><br>Demo track (accepted), NAACL 2022.</li>
+                            	<li id="pub">[Pavlina Kalm, Michael Regan, Sook-kyung Lee, Chris Peverada and William Croft]<br><a href="https://www.aclweb.org/anthology/2020.dmr-1.9/">Representing constructional metaphors</a><br>Second International Workshop on Designing Meaning Representations, COLING 2020.</li>
+                            	<li id="pub">[Michael Regan, James Pustejovsky, and William Croft]<br><a href="https://scinlp.org/history/2020/pdfs/extraction-of-causal-structure-from-procedural-text-for-discourse-representations.pdf">Extraction of causal structure from procedural text for discourse representations</a><br>AKBC, SciNLP Workshop, 2020.</li>
+                            	<li id="pub">[William Croft, Pavlina Kalm, and Michael Regan]<br><a href="docs/book_chapter_events.pdf">Decomposing Events and Storylines.</a><br>Invited Book Chapter for Events and Stories, Cambridge University Press, 2020.</li>
+                            	<li id="pub">[William Baumgartner, Michael Bada, Sampo Pyysalo, Manuel R. Ciosici, Negacy Hailu, Harrison Pielke-Lombardo, Michael Regan and Lawrence Hunter]<br><a href="https://www.aclweb.org/anthology/D19-5725.pdf">CRAFT Shared Tasks 2019 Overview -- Integrated Structure, Semantics, and Coreference.</a><br>5th Workshop on BioNLP Open Shared Tasks, EMNLP 2019.</li>
+                                <li id="pub">[Pavlina Kalm, Michael Regan, William Croft]<br><a href="https://www.aclweb.org/anthology/W19-3311/">Event structure representation: Between verbs and argument structure constructions.</a><br>First International Workshop on Designing Meaning Representations, ACL 2019.</li>
+                                <li id="pub">[Jens E. L. Van Gysel, Meagan Vigus, Pavlina Kalm, Sook-kyung Lee, Michael Regan, William Croft]<br><a href="https://www.aclweb.org/anthology/W19-3301/">Cross-linguistic semantic annotation: Reconciling the language-specific and the universal.</a><br>First International Workshop on Designing Meaning Representations, ACL 2019.</li>
+                                <li id="pub">[Michael Regan, Pushpendre Rastogi, Arpit Gupta, and Lambert Mathias] <br><a href="https://arxiv.org/abs/1903.11783">A dataset for resolving referring expressions in spoken dialogue via contextual query rewrites (CQR).</a><br>arXiv.</li>
+                                <li id="pub">[Lucia Donatelli, Michael Regan, William Croft, and Nathan Schneider]<br><a href="docs/amrtenseaspect-scil.pdf">Tense and aspect semantics for sentential AMR.</a><br>SCiL, 2019.</li>
+                                <li id="pub">[Tim O'Gorman, Michael Regan, Kira Griffitt, Ulf Hermjakob, Kevin Knight, and Martha Palmer]<br><a href="https://www.aclweb.org/anthology/C18-1313">AMR beyond the sentence: the multi-sentence AMR corpus.</a><br>COLING, 2018.</li>
+                                <li id="pub">[William Croft, Pavlina Pe&scaron;kov&aacute; and Michael Regan]<br><a href="https://www.aclweb.org/anthology/W17-2713/">Integrating decompositional event structures into storylines.</a><br>EventStory Workshop, ACL 2017.</li>
+                                <li id="pub">[William Croft, Dawn Nordquist, Katherine Looney, Michael Regan]<br><a href="docs/linguistic_typology.pdf">Linguistic typology meets Universal Dependencies.</a><br>TLT 2017: 15th International Workshop on Treebanks and Linguistic Theories.</li>
+                                <li id="pub">[William Croft, Pavlina Pe&scaron;kov&aacute; and Michael Regan]<br><a href="https://www.aclweb.org/anthology/W16-1002">Annotation of causal and aspectual structure of events in RED: a preliminary report.</a><br>4th Events Workshop, NAACL-HLT 2016.</li>
+                            </ul>
+
+                            <h2 id="service">Service</h2>
+							<ul style="list-style-type:none; font-family: 'EB Garamond'">
+								<li id="service">Reviewer for:</li>
+								<li id="service">COLING 2020; SigTyp 2020, 2021; NAACL 2021; COLING 2022</li>
+							</ul>
+						</div>
+
+					<!-- One -->
+
+					</div>
+				</div>
+
+
+			<!-- Footer -->
+				<footer id="footer">
+<!-- 					<div class="icons">
+                        <a href=""
+							   class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a>
+					</div> -->
+					<div class="maintained">
+						<p>Maintained by: MR</p>
+					</div>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+		  <script>
+		        // Add scrollspy to <body>
+		      $('body').scrollspy({target: ".navbar", offset: 50});
+
+		      // Add smooth scrolling on all links inside the navbar
+		      $("#navbarScroll a").on('click', function(event) {
+
+		        // Make sure this.hash has a value before overriding default behavior
+		        if (this.hash !== "") {
+
+		          // Prevent default anchor click behavior
+		          event.preventDefault();
+
+		          // Store hash
+		          var hash = this.hash;
+
+		          // Using jQuery's animate() method to add smooth page scroll
+		          // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+		          $('html, body').animate({
+		            scrollTop: $(hash).offset().top
+		          }, 800, function(){
+
+		          // Add hash (#) to URL when done scrolling (default click behavior)
+		            window.location.hash = hash;
+		          });
+
+		        } // End if
+
+		      });
+
+		  </script>
+
+	</body>

@@ -1,0 +1,74 @@
+#pub {
+    margin: 10px 0;
+}
+
+div {
+    margin: 25px;
+}
+
+header {
+    padding: 10px;
+    margin: 20px;
+}
+
+main {
+    font-family: 'Livvic', sans-serif;
+}
+
+
+@media screen and (max-width: 810px) {
+    #section1, #section2, #section3  {
+        margin-left: 150px;
+    }
+  }
+
+
+@media screen and (min-width: 480px) and (max-width: 1000px)  {
+    .page-header h1, h1 {
+        font-size: 32px;
+        text-align: left;
+    }
+    img {
+        max-width: 60px;
+    }
+    p {
+        font-size: 18px;
+    }
+    .nav {
+        font-size: 14px;
+        margin-right: 60px;
+    }
+  }
+
+
+@media screen and (max-width: 480px) {
+    .page-header h1, h1 {
+        font-size: 36px;
+        text-align: left;
+    }
+    div {
+        margin-right: 0em;
+    }
+    img {
+        max-width: 60px;
+    }
+    p {
+        font-size: 12px;
+        margin-left: -4em;
+        margin-right: 0em;
+    }
+    h2 {
+        font-size: 18px;
+    }
+    ul {
+        font-size: 12px;
+        margin-left: -8em;
+        margin-right: -1em;
+    }
+    .row {
+        max-width: 300px;
+    }
+    .col-sm-4 {
+        max-width: 0px;
+    }
+  }
