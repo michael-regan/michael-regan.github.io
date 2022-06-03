@@ -47,7 +47,7 @@ main {
         text-align: left;
     }
     div {
-        margin-right: 0em;
+        margin-right: 0.5em;
     }
     img {
         max-width: 60px;
@@ -71,4 +71,8 @@ main {
     .col-sm-4 {
         max-width: 0px;
     }
+    .border
+      {
+        border:0px solid !important
+        }
   }
