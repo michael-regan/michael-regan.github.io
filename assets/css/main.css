@@ -15,6 +15,14 @@ main {
     font-family: 'Livvic', sans-serif;
 }
 
+h1 {
+    font-size: 36px;
+    }
+
+h2 {
+        font-size: 24px;
+    }
+
 
 @media screen and (max-width: 810px) {
     #section1, #section2, #section3  {
@@ -32,6 +40,9 @@ main {
         max-width: 60px;
     }
     p {
+        font-size: 18px;
+    }
+    h2 {
         font-size: 18px;
     }
     .nav {
@@ -58,11 +69,12 @@ main {
         margin-right: 0em;
     }
     h2 {
-        font-size: 14px;
+        font-size: 18px;
+        margin-left: -1em;
     }
     ul {
         font-size: 12px;
-        margin-left: -8em;
+        margin-left: -4em;
         margin-right: -1em;
     }
     .row {
