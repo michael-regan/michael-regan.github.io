@@ -43,7 +43,7 @@ main {
 
 @media screen and (max-width: 480px) {
     .page-header h1, h1 {
-        font-size: 36px;
+        font-size: 28px;
         text-align: left;
     }
     div {
@@ -58,7 +58,7 @@ main {
         margin-right: 0em;
     }
     h2 {
-        font-size: 18px;
+        font-size: 14px;
     }
     ul {
         font-size: 12px;
